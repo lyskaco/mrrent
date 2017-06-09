@@ -1,0 +1,66 @@
+@import '../../styles';
+
+.landlord-details-dialog {
+	padding: 10px;
+	width: 40vw;
+	background-color: $accent-light;
+	h1 {
+		text-align: center;
+		font-weight: 900;
+		color: $fifth;
+		margin-bottom: 15px;
+
+	}
+	form {
+		text-align: center;
+		width: 75%;
+		margin: 0 auto;
+		h3 {
+			color: $fifth;
+			font-size: 14px;
+			font-weight: 900;
+			text-align: center;
+			margin: 10px 0;
+		}
+		.mat-button {
+			padding: 5px;
+			color: $fifth;
+		}
+		.wrapper {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 90%;
+			margin: 0 auto;
+			margin-bottom: 10px;
+			.input-wrapper {
+				width: 48%;
+			}
+		}
+		.wrapper.id {
+			width: 90%;
+
+			.input-wrapper.serie {
+				width: 40%;
+				margin-right: 4px;
+			}
+			.input-wrapper.number {
+				flex-grow: 2;
+			}
+		}
+		.input-wrapper {
+			width: 90%;
+			margin: 5px auto;
+			input {
+				width: 100%;
+				padding: 12px;
+			}
+		}
+	}
+}
+
+@media(max-width: 768px) {
+	.landlord-details-dialog {
+		width: 100vw;
+	}
+}

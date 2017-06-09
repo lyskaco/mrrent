@@ -1,0 +1,15 @@
+<section class="agent-dashboard">
+	<nav>
+		<div class="my-tennants">
+			<button md-icon-button routerLink='/agent/panel'><md-icon svgIcon='my-offers'></md-icon></button>
+			<h3>agreementy</h3>
+		</div>
+		<div class="inbox">
+			<button md-icon-button routerLink='/agent/inbox'><md-icon svgIcon='inbox'></md-icon></button>
+			<h3>wiadomości</h3>
+			<ng-container *ngIf='userData'>
+					<div class="unread" *ngIf='userData.unreadMessages>=1'>{{userData.unreadMessages}}</div>
+			</ng-container>
+		</div>
+	</nav>
+</section>

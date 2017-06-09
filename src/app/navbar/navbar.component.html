@@ -1,0 +1,16 @@
+<nav class="card-1">
+	<div class="wrapper" routerLink="">
+		<md-icon svgIcon='logo'></md-icon>
+		<h1>Mr<span>Rent</span> 	</h1>
+	</div>
+	<ul class="navbar-first-layer">
+		<li routerLink='{{accountType}}' *ngIf='isLoggedUser'>
+			<button md-icon-button >
+				<md-icon *ngIf='avatar' svgIcon='{{avatar}}'></md-icon>
+				<md-icon *ngIf='!avatar' svgIcon='{{accountType}}'></md-icon>
+			</button>
+		</li>
+		<li *ngIf='!isLoggedUser' routerLink="login"><button md-raised-button >ZALOGUJ</button></li>
+		<li *ngIf='isLoggedUser'><button md-raised-button (click)='logout()'>WYLOGUJ</button></li>
+	</ul>
+</nav>

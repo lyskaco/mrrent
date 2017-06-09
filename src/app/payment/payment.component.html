@@ -1,0 +1,9 @@
+<section class="payment">
+	<article class="loading" *ngIf='loading && !paymentFeedback'>
+		<md-spinner color=accent></md-spinner>
+	</article>
+	<article class="payment-feedback" *ngIf='paymentFeedback'>
+		<h1>Status płatności:</h1>
+		<h2>{{paymentFeedback}}</h2>
+	</article>
+</section>

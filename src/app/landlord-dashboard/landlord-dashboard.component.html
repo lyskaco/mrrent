@@ -1,0 +1,29 @@
+<section class="landlord-dashboard">
+	<nav>
+		<div class="add-offer">
+			<button md-icon-button routerLink='/landlord/new-offer'><md-icon svgIcon='add-offer'></md-icon></button>
+			<h3>dodaj ofertę</h3>
+		</div>
+		<div class="my-offers">
+			<button md-icon-button routerLink='/landlord/my-offers'><md-icon svgIcon='my-offers'></md-icon></button>
+			<h3>moje oferty</h3>
+		</div>
+		<div class="inbox">
+			<button md-icon-button routerLink='/landlord/inbox'><md-icon svgIcon='inbox'></md-icon></button>
+			<h3>wiadomości</h3>
+			<ng-container *ngIf='userData'>
+					<div class="unread" *ngIf='userData.unreadMessages>=1'>{{userData.unreadMessages}}</div>
+			</ng-container>
+
+		
+		</div>
+		<div class="my-tennants">
+			<button md-icon-button [routerLink]="['/landlord/my-tennants']"><md-icon svgIcon='my-tennants'></md-icon></button>
+			<h3>moi najemcy</h3>
+		</div>
+		<div class="account-settings">
+			<button md-icon-button routerLink='/landlord/settings'><md-icon svgIcon='settings'></md-icon></button>
+			<h3>ustawienia konta</h3>
+		</div>
+	</nav>
+</section>

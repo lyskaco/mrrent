@@ -1,0 +1,68 @@
+<section class="landlord-inbox">
+	<nav class="conversation-list card-2">
+		<ng-container *ngIf='userConversations'>
+			<div class="conversation" *ngFor="let item of userConversations" >
+				<div class="button-container" [ngClass]='{"agent-conv": item.participants.length === 2}'>
+					<ng-container *ngFor='let part of item.participants'>
+						<button md-icon-button (click)='showSingleConversation(item)' >
+							<md-icon svgIcon='{{part.avatarUrl}}'></md-icon>
+							<div class="name card-1">
+								{{part.name | limitTo:1}}
+							</div>
+						</button>
+					</ng-container>
+					<div class="unread" *ngIf='item.unread >0'>{{item.unread}}</div>
+				
+				</div>
+				
+				<div class="loading conversation" *ngIf='item.loading'>
+					<md-spinner></md-spinner>
+				</div>
+			</div>
+		</ng-container>
+		<ng-container *ngIf='loadingIndicator'>
+			<div class="loading">
+				<md-spinner></md-spinner>
+			</div>
+		</ng-container>
+		<ng-container *ngIf='!loadingIndicator && userConversations'>
+			<div class="loading" *ngIf='userConversations.length===0'>
+				<p>Brak wiadomości</p>
+			</div>
+		</ng-container>
+	</nav>
+	<main>
+		<header>
+			<button md-icon-button class="card-1"><md-icon svgIcon='inbox'></md-icon></button>
+		</header>
+		<article [@messageWindow] class="conversation-window card-1" *ngIf='currentConversation'>
+			<header class="">
+				<div class="sub">
+					<h2>{{currentConversation.thread.subject}}</h2>
+					<h3>| {{currentConversation.thread.created_at_mill | date}}</h3>
+					<button md-icon-button (click)='deleteConversation()'><md-icon class='mdi mdi-delete'></md-icon></button>
+				</div>
+				
+			</header>
+			<div class="content" #messageWindow>
+				<div class="message" *ngFor='let message of currentConversation.messages' [ngClass]='{"left": message.user_id !== user_id, "right":message.user_id === user_id}'>
+					<div class="message-content">
+						<span class="sender">{{message.name | limitTo:1}}</span>
+						<div  [ngClass]='{"other-guy": message.user_id !== user_id, "user":message.user_id === user_id}' class="body">{{message.body}}</div>
+						<span class='created'>{{message.posted_at | Ago}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="panel card-1">
+				<div class="input-wrapper">
+					<input type="text" [(ngModel)]="message" (keydown.enter)='updateMessage(currentConversation)'>
+					<div class="loading" *ngIf='isSending'>
+						<md-spinner color='accent'></md-spinner>
+					</div>
+				</div>
+				<button md-icon-button (click)='updateMessage(currentConversation)'><md-icon svgIcon='plne'></md-icon></button>
+			</div>
+		</article>
+	</main>
+	
+</section>

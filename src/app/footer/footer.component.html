@@ -1,0 +1,21 @@
+<footer #footer class="main-footer "  [ngClass]='{"tall": isTall,inbox: currentRoute.indexOf("inbox")>=0, search: currentRoute.indexOf("search")>=0}' (click)='setTall()' >
+	<div class="copyrights ">
+		<p>Lyska &copy; 2017</p>
+	</div>
+	<div class="contact">
+		<h3>Skontaktuj się z nami</h3>
+		<ul>
+			<li><md-icon class='mdi mdi-phone'></md-icon> 745-342-543</li>
+			<li><md-icon class='mdi mdi-email-outline'></md-icon> admin@mrrent.pl</li>
+			<li><md-icon class='mdi mdi-map-marker'></md-icon> Kwiatowa 6, 12-345 Poznań</li>
+		</ul>
+	</div>
+	<div class="social">
+		<button md-icon-button><md-icon class='mdi mdi-facebook'></md-icon> </button>
+	</div>
+	<div class="tos">
+		<div class="flaticon">Icons designed by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
+		<a href="">Polityka prywatności</a>
+		<a href="">Zasady korzystania</a>
+	</div>
+</footer>

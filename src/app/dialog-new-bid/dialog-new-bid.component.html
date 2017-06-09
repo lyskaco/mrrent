@@ -1,0 +1,66 @@
+<div class="dialog-new-bid">
+	    	<div class="step">
+	    		<button md-icon-button (click)='dialogClose()'><md-icon class='mdi mdi-close'></md-icon></button>
+	    		<div class="col landlord-prices">
+	    			<md-icon svgIcon='home-icon' class='home'></md-icon>
+	    			<h1>{{offerTitle}}</h1>
+	    			<h3><md-icon class='mdi mdi-map-marker'></md-icon>{{offerAddress}}</h3>
+	    			<p class="card-1">Czynsz: <span>{{coreMonthlyFee}} PLN</span></p>
+	    			<p class="card-1">Kaucja: <span>{{coreDeposit}} PLN</span></p>
+	    		</div>
+	    		<div class="col tennant-prices">
+	    			<h1>Dodaj własną ofertę</h1>
+	    			<form>
+	    				<div class="input-wrapper">
+      						<input type="number" placeholder='czynsz' class="inpt card-1 lg form-control mrgd"
+				               required
+				               [(ngModel)]="bid.monthlyFee" name="MonthlyFee"
+				               #MonthlyFee="ngModel">
+               				<div *ngIf="MonthlyFee.errors">
+			                  <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="MonthlyFee.errors.required && (MonthlyFee.dirty || MonthlyFee.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+               				</div>
+               
+				              <md-hint class='success' *ngIf="(MonthlyFee.dirty || MonthlyFee.touched) && !MonthlyFee.focus
+				        && MonthlyFee.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+				        
+				          </div>
+				          <div class="input-wrapper">
+      						<input type="number" placeholder='kaucja' class="inpt card-1 lg form-control mrgd"
+				               required
+				               [(ngModel)]="bid.deposit" name="Deposit"
+				               #Deposit="ngModel">
+               				<div *ngIf="Deposit.errors">
+			                  <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="Deposit.errors.required && (Deposit.dirty || Deposit.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+               				</div>
+               
+				              <md-hint class='success' *ngIf="(Deposit.dirty || Deposit.touched) && !Deposit.focus
+				        && Deposit.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+				        
+				          </div>
+				          <div class="input-wrapper">
+				        				          <my-date-picker editableDateField=false placeholder='data wprowadzenia' [(ngModel)]="bid.moveInDate" name='moveInDate' [locale]='pl' [options]="myDatePickerOptions"
+                			></my-date-picker>
+                			</div>
+                			<div class="input-wrapper">
+      						<input type="number" min=1 max=24 placeholder='długość wynajmu (1-24)' class="inpt card-1 lg form-control mrgd"
+				               required
+				               [(ngModel)]="bid.contractDuration" name="ContractDuration"
+				               #ContractDuration="ngModel">
+               				<div *ngIf="ContractDuration.errors">
+			                  <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="ContractDuration.errors.required && (ContractDuration.dirty || ContractDuration.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+			                   <md-hint mdTooltip='Minimalny okres to 1 miesiąc!' class='alert' *ngIf="ContractDuration.errors.min && (ContractDuration.dirty || ContractDuration.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+			                    <md-hint mdTooltip='Maksymalny okres to 24 miesiące!' class='alert' *ngIf="ContractDuration.errors.max && (ContractDuration.dirty || ContractDuration.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+               				</div>
+               
+				              <md-hint class='success' *ngIf="(ContractDuration.dirty || ContractDuration.touched) && !ContractDuration.focus
+				        && ContractDuration.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+				        
+				          </div>
+	    			</form>
+	    			<div class="button-container">
+	    				<button md-icon-button (click)='sendBid()' [disabled]='!bid.contractDuration || !bid.monthlyFee || !bid.deposit || !bid.moveInDate'><md-icon svgIcon='plne'></md-icon></button>
+	    				<md-spinner color=accent *ngIf='bidUploading'></md-spinner>
+	    			</div>
+	    		</div>
+	    	</div>
+</div>

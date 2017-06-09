@@ -1,0 +1,43 @@
+<section class="agent-panel">
+	<h1>Agreementy</h1>
+	<p>Lista wszystkich agreementów dostępnych na stronie, agent może kontaktować się z użytkownikami biorącymi udział w agreemencie, zmieniać status i usuwać agreementy.</p>
+	<article class="agreement-wrapper" *ngIf='allAgreements'>
+		<div class="agreement card-2" *ngFor='let agr of allAgreements'>
+			<div class="info-users">
+				<ul class="user">
+					<li>TENANT</li>
+					<li>Imię i nazwisko: <span>{{agr.tennantData.UserData.name}}</span></li>
+					<li>Numer telefonu: <span>{{agr.tennantData.UserData.telephoneNumber}}</span></li>
+					<li>Seria i numer dowodu: <span>{{agr.tennantData.tennantIdSeries}}{{agr.tennantData.tennantIdNumber}}</span></li>
+					<li>Adres zameldowania: <span>{{agr.tennantData.tennantStreet}} {{agr.tennantData.tennantBuildingNumber}}
+						<span *ngIf='agr.tennantData.tennantApartmentNumber'>/{{agr.tennantData.tennantApartmentNumber}}</span>, {{agr.tennantData.tennantCity}}</span>
+					</li>
+				</ul>
+				<ul class="user">
+					<li>LANDLORD</li>
+					<li>Imie i nazwisko: <span>{{agr.landlordData.UserData.name}}</span></li>
+					<li>Numer telefonu: <span>{{agr.landlordData.UserData.telephoneNumber}}</span></li>
+					<li>Numer księgi wieczystej: <span>{{agr.landlordData.mortgageNumber}}</span></li>
+					<li>Seria i numer dowodu: <span>{{agr.landlordData.idSeries}}{{agr.landlordData.idNumber}}</span></li>
+					<li>Adres zameldowania: <span>{{agr.landlordData.street}} {{agr.landlordData.buildingNumber}} <span *ngIf='agr.landlordData.apartmentNumber'>/ {{agr.landlordData.apartmentNumber}}</span>, {{agr.landlordData.city}}</span></li>
+				</ul>
+			</div>
+			<ul class="agreement-data">
+				<li>Status:  {{agr.agreementStatus}}</li>
+				<li>Czynsz: {{agr.bidData.BidMonthlyFee}}</li>
+				<li>Depozyt: {{agr.bidData.BidDeposit}}</li>
+				<li>Czas trwania: {{agr.bidData.bidContractDuration}} m.</li>
+				<li>Data wprowadzki: {{agr.bidData.bidMoveInDate | date}}</li>
+				<li>ID przydzielonego agenta: 
+					<span *ngIf='agr.isAgentAssigned'>Agent przydzielony</span>
+					<span *ngIf='!agr.isAgentAssigned'> Brak przydzielonego agenta </span>
+					</li>
+			</ul>
+			<div class="button-container">
+				<button md-icon-button [routerLink]="['/offer/'+agr.offer_id]"><md-icon svgIcon='binoculars'></md-icon></button>
+				<button [disabled]='agr.isAgentAssigned===1' md-icon-button (click)='startThread(agr)' ><md-icon svgIcon='letter'></md-icon></button>
+				<button md-icon-button (click)='deleteAgr(agr.id)'><md-icon svgIcon='erase'></md-icon></button>
+			</div>
+		</div>
+	</article>
+</section>

@@ -1,0 +1,103 @@
+<section class="register">
+	<article class="card-1">
+		<h1>Zarejestruj się</h1>
+		<div class="choice-acount-type card-1" *ngIf='!registerCredentials.accountType'>
+			<h3>Wybierz typ konta:</h3>
+			<button mdTooltip='Chcę znaleźć mieszkanie.' md-icon-button class="card-1" (click)='registerCredentials.accountType="tennant"'><md-icon svgIcon='tennant'></md-icon></button>
+			<button (click)='registerCredentials.accountType="landlord"' mdTooltip='Chcę zamieścić ofertę.' md-icon-button class="card-1"><md-icon svgIcon='landlord'></md-icon></button>
+		</div>
+		<form class="" *ngIf='registerCredentials.accountType'>
+      <button (click)='registerCredentials.accountType=false' *ngIf='registerCredentials.accountType==="tennant"' md-icon-button><md-icon svgIcon='tennant'></md-icon></button>
+      <button (click)='registerCredentials.accountType=false'  *ngIf='registerCredentials.accountType==="landlord"' md-icon-button><md-icon svgIcon='landlord'></md-icon></button><br>
+		<div class="pair-wrapper">
+         <div class="input-wrapper">
+   			<input type="text" placeholder='imię' class=" card-1 inpt lg form-control mrgd"
+                  required
+                  [(ngModel)]="registerCredentials.firstName" name="firstName"
+                  #FirstName="ngModel">
+                  <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="FirstName.errors && (FirstName.dirty || FirstName.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+   				<md-hint class='success' *ngIf="(FirstName.dirty || FirstName.touched) && !FirstName.focus
+   				&& FirstName.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+               </div>
+               <div class="input-wrapper">
+   			<input type="text" placeholder='nazwisko' class=" card-1 inpt lg form-control mrgd"
+                  required
+                  [(ngModel)]="registerCredentials.lastName" name="lastName"
+                  #LastName="ngModel">
+                  <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="LastName.errors && (LastName.dirty || LastName.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+   				<md-hint class='success' *ngIf="(LastName.dirty || LastName.touched) && !LastName.focus
+   				&& LastName.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+               </div>
+         </div>
+			<div class="input-wrapper">
+			<input type="text" placeholder='nazwa konta' class=" card-1 inpt lg form-control"
+               required
+               [(ngModel)]="registerCredentials.accountName" name="accountName"
+               #AccountName="ngModel">
+               <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="AccountName.errors && (AccountName.dirty || AccountName.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+				<md-hint class='success' *ngIf="(AccountName.dirty || AccountName.touched) && !AccountName.focus
+				&& AccountName.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+            </div>
+            <div class="input-wrapper">
+			<input type="email" placeholder='email' class=" card-1 inpt lg form-control"
+               required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+               [(ngModel)]="registerCredentials.email" name="email"
+               #Email="ngModel">
+               <div *ngIf="Email.errors && (Email.dirty || Email.touched)">
+               		<md-hint *ngIf='Email.errors.required' mdTooltip='Pole wymagane!' class='alert'  ><i class="mdi mdi-alert"></i></md-hint>
+               		<md-hint *ngIf='Email.errors.pattern' mdTooltip='Wpisz poprawny adres email!' class='alert'  ><i class="mdi mdi-alert"></i></md-hint>
+               </div>
+               
+				<md-hint class='success' *ngIf="(Email.dirty || Email.touched) && Email.valid"> <i class="mdi mdi-check"></i></md-hint>
+            </div>
+                                        <div class="input-wrapper offerTitle">
+      <input type="number" placeholder='numer telefonu' class=" card-1 inpt lg form-control"
+               required
+               [(ngModel)]="registerCredentials.telephone" name="telephone"
+               #Telephone="ngModel">
+               <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="Telephone.errors && (Telephone.dirty || Telephone.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+        <md-hint class='success' *ngIf="(Telephone.dirty || Telephone.touched) && !Telephone.focus
+        && Telephone.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+        </div>
+            <div class="input-wrapper">
+               <input type="text" placeholder='hasło'  class=" card-1 inpt lg form-control" id="name"
+               required
+               [(ngModel)]="registerCredentials.password" minlength='8' pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$' type='password' size="25" name="password"
+               #Password="ngModel">
+               <div *ngIf="Password.errors && (Password.dirty || Password.touched)">
+              	 <md-hint *ngIf='Password.errors.required' mdTooltip='Pole wymagane!' class='alert' ><i class="mdi mdi-alert"></i></md-hint>
+              	 <md-hint *ngIf='Password.errors.pattern' mdTooltip='Hasło musi zawierać przynajmniej: 1 dużą literę, małą literę i cyfrę' class='alert' ><i class="mdi mdi-alert"></i></md-hint>
+              	 <md-hint *ngIf='Password.errors.minlength' mdTooltip='Minimum 8 znaków!' class='alert' ><i class="mdi mdi-alert"></i></md-hint>
+               </div>
+				<md-hint class='success' *ngIf="(Password.dirty || Password.touched) && !Password.focus
+				&& Password.valid"> <i class="mdi mdi-check"></i></md-hint>
+            </div>
+            <div class="input-wrapper">
+               <input type="text" placeholder='powtórz hasło'  class=" card-1 inpt lg form-control" id="name"
+               required
+               [(ngModel)]="repeat_password" type='password' size="25" name="repeatPassword"
+               #repeat_Password="ngModel">
+               <md-hint  class='alert' *ngIf="(repeat_Password.dirty || repeat_Password.touched) && registerCredentials.password != repeat_password && !repeat_Password.focus"><i mdTooltip='Hasła nie są jednakowe' class="mdi mdi-alert"></i></md-hint>
+				<md-hint class='success' *ngIf="(repeat_Password.dirty || repeat_Password.touched) && !repeat_Password.focus
+				&& repeat_Password.valid && password === repeat_password"> <i class="mdi mdi-check"></i></md-hint>
+            </div>
+            <p>
+               {{messageAfterSubmit}}
+            </p>
+            <div *ngIf='isLoading' class="spinner">
+               <md-spinner color='accent'></md-spinner>
+            </div>
+            <re-captcha
+                [(ngModel)]="captcha"
+                name="captcha"
+                required
+                (resolved) = 'captcha=true'
+                siteKey="6LcIsiEUAAAAAK8U1ZAt1FBloyTqVPOW6oS48EOq"
+                #captchaControl="ngModel" ngDefaultControl>
+            </re-captcha>
+            <button md-button [disabled]='!registerCredentials.telephone || !registerCredentials.email || !registerCredentials.firstName || !registerCredentials.lastName || !registerCredentials.password || !Password.valid || !captchaControl.valid' (click)='register()'>ZAREJESTRUJ</button>
+            <p>Masz już konto? <a routerLink='/login'>Zaloguj się!</a></p>
+		</form>
+		
+	</article>
+</section>

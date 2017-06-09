@@ -1,0 +1,29 @@
+<section class="tennant-dashboard">
+	<nav>
+		<div class="add-offer">
+			<button md-icon-button routerLink='/search/ChIJAZ-GmmbMHkcR_NPqiCq-8HI'><md-icon svgIcon='search'></md-icon></button>
+			<h3>szukaj mieszkań</h3>
+		</div>
+		<div class="my-offers">
+			<button md-icon-button routerLink='/tennant/favorites'><md-icon svgIcon='favorite'></md-icon></button>
+			<h3>ulubione i oferty</h3>
+		</div>
+		<div class="my-tennants">
+			<button md-icon-button routerLink='/tennant/panel'><md-icon svgIcon='my-offers'></md-icon></button>
+			<h3>panel wynajmu</h3>
+		</div>
+		<div class="inbox">
+			<button md-icon-button routerLink='/tennant/inbox'><md-icon svgIcon='inbox'></md-icon></button>
+			<h3>wiadomości</h3>
+			<ng-container *ngIf='userData'>
+					<div class="unread" *ngIf='userData.unreadMessages>=1'>{{userData.unreadMessages}}</div>
+			</ng-container>
+
+		
+		</div>
+		<div class="account-settings">
+			<button md-icon-button routerLink='/tennant/settings'><md-icon svgIcon='settings'></md-icon></button>
+			<h3>ustawienia konta</h3>
+		</div>
+	</nav>
+</section>

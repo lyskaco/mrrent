@@ -1,0 +1,22 @@
+<div class="dialog-message">
+	<h1>Nowa wiadomość</h1>
+	<h4>{{offerTitle}}</h4>
+	<md-icon class='mdi mdi-pencil'></md-icon>
+	<form>
+		<div class="textarea-wrapper">
+            <div class="input-wrapper offerDescription">
+                <textarea placeholder='wiadomość' class="card-1 inpt lg form-control mrgd"
+               required
+               [(ngModel)]="message" name="message"
+               #Message="ngModel"></textarea>
+               <div *ngIf="Message.errors">
+                  <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="Message.errors.required && (Message.dirty || Message.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+               </div>      
+        <md-hint class='success' *ngIf="(Message.dirty || Message.touched) && !Message.focus
+        && Message.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+        </div>
+            </div>
+            <div class="loading" *ngIf='isSending'><md-spinner color=accent></md-spinner></div>
+            <button md-button [disabled]='!message' (click)='sendMessage()'>WYŚLIJ</button>
+	</form>
+</div>

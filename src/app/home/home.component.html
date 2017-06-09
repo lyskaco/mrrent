@@ -1,0 +1,104 @@
+<section class="home">
+	<article parallax parallax-speed=0.5 parallax-backgroundPositionY='0' class="jumbotron">
+		<div class="input-wrapper">
+			<input type="text" placeholder='wpisz miasto, dzielnicę lub ulicę' class=" card-1 inpt lg form-control mrgd"
+               required pattern="^[a-zA-Z\-_ ’'‘ÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ]+$"
+               [(ngModel)]="searchPlaceID" name="facilityAddress"
+               #SearchPlaceId="ngModel" autocorrect="off" #search autocapitalize="off" spellcheck="off" type="text">
+            <button md-button [disabled]='!place_id' (click)='searchForOffers()'><md-icon class='mdi mdi-magnify'></md-icon></button>
+		</div>
+		<div class="layer">
+			<div class="huge-circle card-3"></div>
+		</div>
+	</article>
+	<article class="home-about">
+		<div class="about card-1" >
+			<div class="wrapper" [@about]="scrollimateOptions.about.currentState" [scrollimate]="scrollimateOptions.about">
+				<h1>Czym jest MrRent?</h1>
+				
+				<div class="about-content">
+					<p>
+						Jesteśmy innowacyjną platformą, która w prosty sposób łączy najemców z wynajmującymi. Cały proces odbywa się online na naszej stronie internetowej, co pozwala zaoszczędzić czas i ułatwić użytkownikom znalezienie lub wynajęcie mieszkania. Naszym celem jest zapewnienie każdej ze stron dogodnych i korzystnych cenowo warunków.
+					</p>
+					<p>
+						Jesteśmy innowacyjną agencją nieruchomości. Nasz serwis pozwala użytkownikom na publikacje ogłoszeń wynajmu. . Wyróżniamy się na tle innych agencji ponieważ, pozwalamy na podpisywanie umów online oraz sprawdzenie przyszłego wynajmującego, ale przede wszystkim modernizujemy rynek wynajmu. Przyszli najemcy “licytują” swój przyszły czynsz i depozyt. To nie wszystko co chcemy oferować :)
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="option-container card-1">
+			<div class="button-wrapper">
+				<div  [ngClass]='{"selected":displayOption==="tennant"}' (click)='displayOption="tennant"'>Lokator</div>
+				<div  [ngClass]='{"selected":displayOption==="landlord"}' (click)='displayOption="landlord"'>Właściciel</div>
+			</div>
+			<div class="option" *ngIf='displayOption==="landlord"'>
+				<div class="row" [@rowItemOne]="scrollimateOptions.rowItemOne.currentState" [scrollimate]="scrollimateOptions.rowItemOne">
+						<md-icon svgIcon='contractt'></md-icon>
+						<div class="content">
+							<h3>Brak formalności</h3>
+							<p> 
+								<span>Przygotowujemy umowę najmu, a Państwo podpisują ją online</span>
+								<span>Jeżeli wynajem mieszkania ma być na dłuższy okres, wtedy wysyłamy pocztą umowę priorytetem.</span>
+								<span>Mają Państwo możliwość kontrolowania  postępu przesyłki online.</span>
+								<span>Nie ma żadnych dalszych pośredników.</span>
+							</p>
+						</div>
+					</div>
+				<div class="row" [@rowItemOne]="scrollimateOptions.rowItemTwo.currentState" [scrollimate]="scrollimateOptions.rowItemTwo">
+					<div class="content">
+						<h3>Otrzymuj oferty od potencjalnych najemców </h3>
+						<p>
+							Przeglądaj ich oferty, przeglądaj profile, otrzymuj lepszych lokatorów </p>
+					</div>
+					<md-icon svgIcon='tennant'></md-icon>
+				</div>
+				<div class="row" [@rowItemOne]="scrollimateOptions.rowItemThree.currentState" [scrollimate]="scrollimateOptions.rowItemThree">
+					<md-icon svgIcon='help'></md-icon>
+					<div class="content">
+						<h3>Chętnie pomożemy z wynajmem</h3>
+						<p>
+							Zdjęcia, przygotowanie mieszkania. Sprawdź przed podpisaniem umowy, credit scoring lub prześwietl firmę.
+						</p>
+					</div>
+				</div>
+
+			</div>
+			<div class="option" *ngIf='displayOption==="tennant"'>
+				<div class="row" [@rowItemOne]="scrollimateOptions.rowItemOne.currentState" [scrollimate]="scrollimateOptions.rowItemOne">
+						<md-icon svgIcon='contractt'></md-icon>
+						<div class="content">
+							<h3>Brak formalności</h3>
+							<p>
+								<span>Przygotowujemy umowę najmu, a Państwo podpisują ją online</span>
+								<span>Jeżeli wynajem mieszkania ma być na dłuższy okres, wtedy wysyłamy pocztą umowę priorytetem.</span>
+								<span>Mają Państwo możliwość kontrolowania  postępu przesyłki online.</span>
+								<span>Nie ma żadnych dalszych pośredników, każda oferta mieszkaniowa jest unikatowa.</span>
+							</p>
+						</div>
+					</div>
+				<div class="row" [@rowItemOne]="scrollimateOptions.rowItemTwo.currentState" [scrollimate]="scrollimateOptions.rowItemTwo">
+					<div class="content">
+						<h3>Państwo licytują kwotę czynszu i depozytu.</h3>
+						<p>Należy wysłać ofertę (zaaplikować) i podać kwotę czynszu oraz depozytu, jaką są Państwo w stanie zapłacić. Z wyższym kosztem najmu prawdopodobnie uda się otrzymać niższą kwotę depozytu.</p>
+					</div>
+					<md-icon svgIcon='auctionn'></md-icon>
+				</div>
+				<div class="row" [@rowItemOne]="scrollimateOptions.rowItemThree.currentState" [scrollimate]="scrollimateOptions.rowItemThree">
+					<md-icon svgIcon='chatt'></md-icon>
+					<div class="content">
+						<h3>Zintegrowany chat</h3>
+						<p>Mają Państwo możliwość rozmowy z wynajmującym przez naszą platformę. Jeżeli mają Państwo jakieś pytania zachęcamy do kontaktu. Oferujemy także dostęp do przypisanego agenta, który zawsze chętnie pomoże.</p>
+					</div>
+				</div>
+				<div class="row" [@rowItemOne]="scrollimateOptions.rowItemFour.currentState" [scrollimate]="scrollimateOptions.rowItemFour">
+					<div class="content">
+						<h3>Punkty</h3>
+						<p>Zbieraj punkty i buduj swoją wiarygodność. </p>
+					</div>
+					<md-icon svgIcon='points'></md-icon>
+				</div>
+			</div>
+		</div>
+	</article>
+</section>
+

@@ -1,0 +1,61 @@
+@import '../../styles';
+
+.dialog-message {
+	text-align: center;
+	background-image: linear-gradient(120deg, $primary-aggresive, $primary);
+	padding: 15px;
+	.loading {
+		.mat-spinner {
+			width: 35px;
+			height: 35px;
+			margin: 10px auto;
+		}
+	}
+	.mat-icon {
+		color: $fifth;
+		margin: 15px 0 0 0;
+	}
+	h1 {
+		color: $fifth;
+		font-weight: 900;
+
+	}
+	h4 {
+		color: $fifth;
+		font-weight: 200;
+	}
+	.mat-button {
+		background-color: #FFF;
+		color: $primary-aggresive;
+	}
+	.textarea-wrapper {
+		margin: 20px 0;
+		textarea {
+			border-radius: 3px;
+			resize: none;
+			font-size: 20px;
+			width: 40vw;
+			height: 20vh;
+			background-color: $fifth;
+		}
+	}
+}
+
+@media(max-width: 768px) {
+	.dialog-message {
+		width: 100vw;
+		form {
+			width: 100%;
+			.textarea-wrapper {
+				.input-wrapper {
+					width: 100%;
+				textarea {
+					width: 95%;
+					margin: 0 auto;
+					font-size: 14px;
+				}
+			}
+			}
+		}
+	}
+}

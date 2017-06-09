@@ -1,0 +1,109 @@
+<section class="single-offer">
+	<article class="loading" *ngIf="!singleOffer && !singleOffer404">
+		<md-spinner *ngIf='!singleOffer'></md-spinner>
+	</article>
+	<article class="no-data" *ngIf='!singleOffer && singleOffer404'>
+		<md-icon class='mdi mdi-magnify'></md-icon>
+		<h1>Nie znaleziono ogłoszenia</h1>
+	</article>
+	<article class='offer' *ngIf='singleOffer' >
+		<div  class="jumbotron card-1" [ngClass]='{"gallery-trigger": galleryTrigger}' [ngStyle]='{"background-image": "url("+url+singleOffer.images[imgIndex].path+")"}'>
+			<div class="content">
+				<div class="col introduction">
+					<h1>{{singleOffer.offerTitle}}</h1>
+					<h2><md-icon class='mdi mdi-map-marker'></md-icon>{{singleOffer.facilityFormattedAddress}}</h2>
+				</div>
+				<ul class="col basic">
+					<li  mdTooltip='Typ zabudowy'><md-icon svgIcon='home-icon'></md-icon><span>{{singleOffer.buildingType}}</span></li>
+					<li mdTooltip='Liczba pokoi'><md-icon svgIcon='bed-icon'></md-icon><span>{{singleOffer.roomsCount}}</span></li>
+					<li mdTooltip='Powierzchnia'><md-icon class='mdi mdi-rhombus'></md-icon><span>{{singleOffer.sqmt}}m<sup>2</sup></span></li>
+					<li mdTooltip='Liczba ofert'><md-icon svgIcon='auction'></md-icon><span>{{singleOffer.bids.length}}</span></li>
+				</ul>
+			</div>
+			<div class="layer"></div>
+			<div class="gallery-navigator" *ngIf='galleryTrigger'>
+				<button md-icon-button class="exit card-1" (click)='galleryTrigger=!galleryTrigger'><md-icon class='mdi mdi-close-circle-outline'></md-icon></button>
+				<button md-icon-button class='carousel left card-1' (click)='galleryNavigate(-1)'><md-icon class='mdi mdi-chevron-left'></md-icon></button>
+				<button md-icon-button class='carousel right card-1' (click)='galleryNavigate(1)'><md-icon class='mdi mdi-chevron-right'></md-icon></button>
+			</div>
+		</div>
+		<div class="gallery">
+			<div [ngClass]='{"gt3":singleOffer.images.length>3}' class="image-container card-1" *ngFor='let image of singleOffer.images; let i = index' (click)='imgIndex = i; galleryTrigger=true'>
+				<img [src]='url+image.path' alt="image">
+			</div>
+		</div>
+		<div class="bid-accepted" *ngIf='isBidAccepted()'>
+			<p>Twoja oferta została zaakceptowana przez właściciela.</p>
+		</div>
+		<div class="agent-panel" *ngIf='userAccountType==="agent"'>
+			<button md-icon-button (click)='adminDeleteOffer()'><md-icon class='mdi mdi-delete'></md-icon></button>
+		</div>
+		<main>
+			<div class="offer-details card-1">
+				<div class="description">
+					<h2>Opis mieszkania</h2>
+					<p>
+						{{singleOffer.offerDescription}}
+					</p>	
+				</div>
+				<div *ngIf='singleOffer.moreInfo[0]' class="additional-info card-2" [@moreInfo]="scrollimateOptions.moreInfo.currentState" [scrollimate]="scrollimateOptions.moreInfo">
+					<h2>Dodatkowe informacje</h2>
+					<ul>
+						<li *ngFor='let info of singleOffer.moreInfo'> 
+							<md-icon svgIcon='so-{{info}}'></md-icon>
+							<span>{{moreInfoDesc[info]}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="nearby card-2" [@nearby]="scrollimateOptions.nearby.currentState" [scrollimate]="scrollimateOptions.nearby">
+					<h2>W okolicy 400 metrów</h2>
+					<ul class="nearby-container">
+						<li *ngFor='let nearby of nearbyArray'>
+							<md-icon svgIcon='p-{{nearby.item}}'></md-icon>
+							<h4>{{nearby.description}}</h4>
+							<span>{{nearby.amount}}</span>
+						</li>
+					</ul>
+				</div>
+				<p class="end-offer">
+					Zakończenie oferty: <span>{{singleOffer.created_at | dayCountdown}}</span>
+				</p>
+			</div>
+			<div class="prices" [@toFixed]="scrollimateOptions.toFixed.currentState" [scrollimate]="scrollimateOptions.toFixed">
+
+					<div class="interest card-2">
+						<ul class="stars" [ngClass]='{"hover-1":starHover===1, "hover-2":starHover===2, "hover-3":starHover===3, "hover-4":starHover===4, "hover-5":starHover===5}'>
+							<li *ngFor='let rate of [1,2,3,4,5]' (mouseleave)='starHover===0' (mouseover)='starHover=rate' (click)='setRate(rate)'><md-icon class='mdi mdi-star' ></md-icon></li>
+						</ul>
+					</div>
+				<div class="container card-3">
+					<ul class="fees">
+						<li><md-icon svgIcon='monthlyFee' mdTooltip='Czynsz' mdTooltipPosition='below'></md-icon><span>{{singleOffer.monthlyFee}} zł</span></li>
+						<li><md-icon svgIcon='deposit' mdTooltip='Kaucja' mdTooltipPosition='below'></md-icon><span>{{singleOffer.deposit}} zł</span> </li>
+						<li><md-icon svgIcon='mediaFee' mdTooltip='Opłaty za media' mdTooltipPosition='below'></md-icon><span>{{singleOffer.mediaFee}} zł</span></li>
+						<li><md-icon svgIcon='usageFee' mdTooltip='Opłaty licznikowe' mdTooltipPosition='below'></md-icon><span>{{singleOffer.usageFee}} zł</span></li>
+					</ul>
+					<div class="button-container">
+						<button md-button [disabled]='isBidAccepted()' (click)='newBidDialog()'><md-icon svgIcon='auction'></md-icon></button>
+						<button md-button (click)='messageDialog()'><md-icon svgIcon='chat'></md-icon></button>
+					</div>
+					
+				</div>
+				<div class="map card-2">
+					<sebm-google-map  [latitude]="singleOffer.latitude" [longitude]="singleOffer.longitude" [scrollwheel]="false" [zoom]="15">
+	        			<sebm-google-map-marker [iconUrl]='"./assets/home.svg"' [latitude]="singleOffer.latitude" [longitude]="singleOffer.longitude"></sebm-google-map-marker>
+	    			</sebm-google-map>
+				</div>
+			</div>
+
+
+
+		</main>
+
+
+
+
+    </article>
+
+
+</section>

@@ -1,0 +1,84 @@
+<section class="my-offers">
+	<div  class="jumbotron">
+		<md-icon svgIcon='my-offers'></md-icon>
+		<h1>Moje oferty</h1>
+	</div>
+		<article class="offers" *ngIf='userOffers'>
+			<div class="offer card-1" *ngFor='let offer of userOffers' [ngStyle]='{"background-image": "url("+url+offer.images[0].path+")"}' (click)='detailShow = offer'>
+				<h1>{{offer.offerTitle}}</h1>
+			</div>
+		</article>
+		<article class="loading" *ngIf='loadingIndicator'>
+			<md-spinner></md-spinner>
+		</article>
+		<article class='no-data' *ngIf='!loadingIndicator && !userOffers'>
+			<h1>Brak ogłoszeń</h1>
+		</article>
+		<article class="show-detail" *ngIf='detailShow' [ngClass]='{"pending": detailShow.offerStatus === "pending"}'>
+			<nav class='card-1'>
+				<div class="button-container card-1">
+					<button md-icon-button [routerLink]="['/offer/'+detailShow.id]"><md-icon svgIcon='binoculars'></md-icon></button>
+					<button [disabled]='isPending(detailShow)' md-icon-button [routerLink]="['edit/' + detailShow.id]"><md-icon svgIcon='editpen'></md-icon></button>
+					<button [disabled]='isPending(detailShow)' md-icon-button (click)='deleteUserOffer(detailShow.id)'><md-icon svgIcon='erase'></md-icon></button>
+				</div>
+				<h2>{{detailShow.offerTitle}}</h2>
+				<h3><md-icon class='mdi mdi-map-marker'></md-icon>{{detailShow.facilityFormattedAddress}}</h3>
+			
+			</nav>
+			<div class="info">
+				<div class="col interest card-2">
+					<header>
+						<md-icon class='mdi mdi-star'></md-icon>
+						<h3>Zainteresowani</h3>
+					</header>
+					<div class="content">
+						<ng-container *ngIf='detailShow.interest[0]'>
+								<div class="interest-item card-1" *ngFor='let interest of detailShow.interest' >
+									<h3>{{interest.user.name | limitTo:1}}</h3>
+									<ul class="stars" [ngClass]='{"count-1":interest.rate===1, "count-2":interest.rate===2, "count-3":interest.rate===3, "count-4":interest.rate===4, "count-5":interest.rate===5}'>
+										<li *ngFor='let i of [0,1,2,3,4]'>
+											<md-icon class='mdi mdi-star'></md-icon>
+										</li>
+									</ul>
+									<button md-icon-button (click)='openMessageDialog(interest.user.id, detailShow.offerTitle)'><md-icon svgIcon='letter'></md-icon></button>
+								</div>
+						</ng-container>
+						<ng-container *ngIf='!detailShow.interest[0]'>
+							<span class="no-data">
+								Brak zainteresowanych
+							</span>
+						</ng-container>
+					</div>
+				</div>
+				<div class="col bids card-2">
+					<header>
+						<md-icon svgIcon='auction'></md-icon>
+						<h3>Oferty wynajmu</h3>
+					</header>
+					<div class="content">
+						<ng-container *ngIf='detailShow.bids[0]'>
+							<div class="bid card-1" *ngFor='let bid of detailShow.bids' [ngClass]='{"accepted":bid.bidStatus === "accepted"}'>
+								<h2>{{bid.user.name | limitTo:1}}</h2>
+								<p mdTooltip='Czynsz miesięczny'><md-icon svgIcon='monthlyFee'></md-icon> <span>{{bid.BidMonthlyFee}} PLN</span></p>
+								<p mdTooltip='Kaucja'><md-icon svgIcon='deposit'></md-icon> <span>{{bid.BidDeposit}} PLN</span></p>
+								<p mdTooltip='Okres umowy'> <md-icon svgIcon='contract'></md-icon> <span>{{bid.bidContractDuration}} m.</span></p>
+								<p mdTooltip='Data wprowadzenia'><md-icon svgIcon='box'></md-icon> <span>{{bid.bidMoveInDate | date}}</span></p>
+								<div class="button-container">
+									<button mdTooltip='Wyślij wiadomość' md-icon-button (click)='openMessageDialog(bid.user.id, detailShow.offerTitle)'><md-icon svgIcon='letter'></md-icon></button>
+									<button mdTooltip='Zaakceptuj ofertę' md-icon-button [disabled]='isPending(detailShow)' (click)='updateBid(bid)'><md-icon class='mdi mdi-check'></md-icon></button>
+									<button mdTooltip='Usuń ofertę' md-icon-button [disabled]='isPending(detailShow)' (click)='deleteBid(bid.id, bid)'><md-icon svgIcon='erase'></md-icon></button>
+								</div>
+							</div>
+						</ng-container>
+						<ng-container *ngIf='!detailShow.bids[0]'>
+							<span class="no-data">
+								Brak ofert
+							</span>
+						</ng-container>
+
+				</div>
+				</div>
+			</div>
+		</article> 
+			
+</section>

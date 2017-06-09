@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MrRent</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900&amp;subset=latin-ext" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.materialdesignicons.com/1.9.32/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <link rel="stylesheet" href="../assets/override.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+  <script src="node_modules/intl/dist/Intl.min.js"></script> 
+  <script src="node_modules/intl/locale-data/jsonp/pl.js"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.pl"></script>
+  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+</head>
+<body>
+  <style>
+
+    .wrapper-index {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        display: none;
+        z-index: 1000;
+        background-color: #5D37B3;
+}
+ 
+/* .loading screen is visible when app is not bootstraped yet, .my-app is empty */
+    app-root:empty + .wrapper-index {
+        display: block;
+        z-index: 100;
+    }
+  </style>
+  <app-root></app-root>
+  <div class="wrapper-index">
+    <div class="loader">
+  </div>
+  </div>
+</body>
+</html>

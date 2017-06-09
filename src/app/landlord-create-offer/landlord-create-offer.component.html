@@ -1,0 +1,221 @@
+<section class="create-offer" [ngClass]='{"zoom":lol}' [@offerProgressBGP]='offerProgress'>
+	<sebm-google-map *ngIf='newOffer.latitude' [latitude]="newOffer.latitude" [longitude]="newOffer.longitude" [scrollwheel]="false" [zoom]="15">
+        <sebm-google-map-marker [latitude]="newOffer.latitude" [longitude]="newOffer.longitude"></sebm-google-map-marker>
+    </sebm-google-map>
+	<div class="layer">
+	</div>
+
+	<article >
+      <div class="jumbotron card-1" parallax parallax-backgroundPositionY='100' parallax-speed='0.3'>
+        <div class="layer"></div>
+        <md-icon svgIcon='add-offer'></md-icon>
+        <h1>Stwórz nową ofertę: </h1>
+    </div>
+		
+		<form>
+    <div class="wrapper">
+			<div class="input-wrapper offerTitle">
+			<input (blur)='lol=false' (focus)='lol=true' type="text" placeholder='tytuł oferty' class=" card-1 inpt lg form-control mrgd"
+               required maxlength='35'
+               [(ngModel)]="newOffer.offerTitle" name="offerTitle"
+               #OfferTitle="ngModel">
+               <div *ngIf="OfferTitle.errors">
+               		<md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="OfferTitle.errors.required && (OfferTitle.dirty || OfferTitle.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+               		<md-hint mdTooltip='Maksymalnie 35 znaków!' class='alert' *ngIf="OfferTitle.errors.maxlength && (OfferTitle.dirty || OfferTitle.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+               </div>
+               
+				      <md-hint class='success' *ngIf="(OfferTitle.dirty || OfferTitle.touched) && !OfferTitle.focus
+				&& OfferTitle.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+        <button md-button><md-icon class='mdi mdi-feather'></md-icon></button>
+      </div>
+            <div class="row-wrapper">
+            <div class="input-wrapper facilityAddress">
+			<input type="text" placeholder='adres' class=" card-1 inpt lg form-control mrgd"
+               required pattern="^[a-zA-Z\-_ ’'‘ÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ]+$"
+               [(ngModel)]="facilityAddress" name="facilityAddress"
+               #FacilityAddress="ngModel" autocorrect="off" #search autocapitalize="off" spellcheck="off" type="text">
+                <button md-button><md-icon class='mdi mdi-map-marker'></md-icon></button>
+               <div *ngIf="FacilityAddress.errors">
+               		<md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="FacilityAddress.errors.required && (FacilityAddress.dirty || FacilityAddress.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+               		<md-hint mdTooltip='Tylko litery!' class='alert' *ngIf="FacilityAddress.errors.pattern && (FacilityAddress.dirty || FacilityAddress.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+               </div>
+               
+				<md-hint class='success' *ngIf="(FacilityAddress.dirty || FacilityAddress.touched) && !FacilityAddress.focus
+				&& FacilityAddress.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+             
+            </div>
+             <div class="input-wrapper sqmt">
+          <input type="number" placeholder='powierzchnia' class=" card-1 inpt lg form-control mrgd"
+               [(ngModel)]="newOffer.sqmt" name="sqmt"
+               #Sqmt="ngModel" required>
+               <button md-button><md-icon class='mdi mdi-rhombus'></md-icon></button>
+               <div *ngIf="Sqmt.errors">
+                  <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="Sqmt.errors.required && (Sqmt.dirty || Sqmt.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+               </div>
+               
+               </div>
+        <md-hint class='success' *ngIf="(Sqmt.dirty || Sqmt.touched) && !Sqmt.focus
+        && Sqmt.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+          </div>
+            </div>
+            <div class="wrapper">
+            <div class="input-wrapper buildingType">
+                <button class=' card-2' md-button class="buildingTypeToggle">
+                    <md-icon class='mdi mdi-home'></md-icon>
+                </button >
+                <ul class="buildingTypeList" *ngIf='!buildingTypeListOpen'>
+                  <li [ngClass]='{"selected" : type === newOffer.buildingType}' class="card-1" *ngFor = 'let type of buildingTypes; let i = index' (click)='newOffer.buildingType = type'>{{type}}</li>
+                </ul>               
+        <!-- <md-hint class='success' *ngIf="(OfferTitle.dirty || OfferTitle.touched) && !OfferTitle.focus
+        && OfferTitle.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint> -->
+            </div>
+
+             <div class="input-wrapper buildingType roomsCount">
+                <button class=' card-2' md-button class="buildingTypeToggle">
+                    <md-icon class='mdi mdi-sort-numeric'></md-icon>
+                </button >
+                <ul class="buildingTypeList" *ngIf='!roomsCountOpen'>
+                  <li [ngClass]='{"selected" : type === newOffer.roomsCount}' class="card-1" *ngFor = 'let type of roomsCount; let i = index' (click)='newOffer.roomsCount = type'>{{type}}</li>
+                </ul>               
+            </div>
+            </div>
+             <div class="more-info">
+              <div class="button-wrapper ">
+                <button class='' [ngClass]='{"highlighted": newOffer.moreInfo.indexOf(item.icon) >= 0}' (click)='moreInfoAction(item)' md-icon-button *ngFor='let item of moreInformation' mdTooltip='{{item.description}}'>
+                    <md-icon svgIcon='so-{{item.icon}}'></md-icon>
+                </button>
+              </div>
+          </div>
+            <div class="textarea-wrapper">
+                <md-icon svgIcon='pencil'></md-icon>
+                <div class="input-wrapper offerDescription">
+                <textarea (keypress)='checkForEnters($event)' placeholder='opis oferty' class="card-1 inpt lg form-control mrgd"
+               required
+               [(ngModel)]="newOffer.offerDescription" name="offerDescription"
+               #OfferDescription="ngModel"></textarea>
+               <div *ngIf="OfferDescription.errors">
+                  <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="OfferDescription.errors.required && (OfferDescription.dirty || OfferDescription.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+               </div>
+               
+        <md-hint class='success' *ngIf="(OfferDescription.dirty || OfferDescription.touched) && !OfferDescription.focus
+        && OfferDescription.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+        </div>
+            </div>
+        
+        <div class="prices">
+           <md-icon svgIcon='pb'></md-icon>
+            <div class="form-wrapper card-1">
+
+            <div class="column">
+                <md-icon svgIcon='monthlyFee' mdTooltip='Czynsz miesięczny'></md-icon>
+                <md-slider min="0" max="10000" step="10"   name='slider' [(ngModel)]='newOffer.monthlyFee' thumbLabel vertical displayValue='true'></md-slider>
+                <div class="input-wrapper fee-wrapper">
+                    <input class='inpt card-1' required type="text" name='slider' [(ngModel)]="newOffer.monthlyFee" name="monthlyFee"
+                 #MonthlyFee="ngModel">
+                 <div *ngIf="MonthlyFee.errors">
+                    <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="MonthlyFee.errors.required && (MonthlyFee.dirty || MonthlyFee.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+                 </div>
+                 <md-hint class='success' *ngIf="(MonthlyFee.dirty || MonthlyFee.touched) && !MonthlyFee.focus
+                    && MonthlyFee.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+                </div>
+            </div>
+            <div class="column">
+                <md-icon svgIcon='deposit' mdTooltip='Kaucja'></md-icon>
+                <md-slider min="0" max="10000" step="10"   name='deposit' [(ngModel)]='newOffer.deposit' thumbLabel vertical displayValue='true'></md-slider>
+                <div class="input-wrapper fee-wrapper">
+                    <input class='inpt card-1' required type="number" name='slider' [(ngModel)]="newOffer.deposit" name="deposit"
+                 #Deposit="ngModel">
+                 <div *ngIf="Deposit.errors">
+                    <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="Deposit.errors.required && (Deposit.dirty || Deposit.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+                 </div>
+                 <md-hint class='success' *ngIf="(Deposit.dirty || Deposit.touched) && !Deposit.focus
+                    && Deposit.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+                </div>
+            </div>
+            <div class="column">
+                <md-icon svgIcon='mediaFee' mdTooltip='Opłaty za media'></md-icon>
+                <md-slider min="0" max="10000" step="10"   name='mediaFee' [(ngModel)]='newOffer.mediaFee' thumbLabel vertical displayValue='true'></md-slider>
+                <div class="input-wrapper fee-wrapper">
+                    <input class='inpt card-1' required type="number" name='slider' [(ngModel)]="newOffer.mediaFee" name="mediaFee"
+                 #MediaFee="ngModel">
+                 <md-hint class='success' *ngIf="(MediaFee.dirty || MediaFee.touched) && !MonthlyFee.focus
+                    && MediaFee.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+                </div>
+            </div>
+            <div class="column">
+                <md-icon svgIcon='usageFee' mdTooltip='Opłaty licznikowe'></md-icon>
+                <md-slider min="0" max="10000" step="10"   name='usageFee' [(ngModel)]='newOffer.usageFee' thumbLabel vertical displayValue='true'></md-slider>
+                <div class="input-wrapper fee-wrapper">
+                    <input class='inpt card-1' required type="number" name='slider' [(ngModel)]="newOffer.usageFee" name="usageFee"
+                 #UsageFee="ngModel">
+                 <md-hint class='success' *ngIf="(UsageFee.dirty || MonthlyFee.touched) && !UsageFee.focus
+                    && UsageFee.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+                </div>
+            </div>
+              <!-- div class="input-wrapper monthlyFee">
+              <input  type="number" placeholder='czynsz' class=" card-1 inpt form-control mrgd"
+                 required 
+                 [(ngModel)]="newOffer.monthlyFee" name="monthlyFee"
+                 #MonthlyFee="ngModel">
+                 <div *ngIf="MonthlyFee.errors">
+                    <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="MonthlyFee.errors.required && (MonthlyFee.dirty || MonthlyFee.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+                 </div>
+                 <md-hint class='success' *ngIf="(MonthlyFee.dirty || MonthlyFee.touched) && !MonthlyFee.focus
+                    && MonthlyFee.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+            </div>   
+            <div class="input-wrapper monthlyFee">
+              <input  type="number" placeholder='kaucja' class=" card-1 inpt form-control mrgd"
+                 required 
+                 [(ngModel)]="newOffer.deposit" name="deposit"
+                 #Deposit="ngModel">
+                 <div *ngIf="Deposit.errors">
+                    <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="Deposit.errors.required && (Deposit.dirty || Deposit.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+                 </div>
+                 <md-hint class='success' *ngIf="(Deposit.dirty || Deposit.touched) && !Deposit.focus
+                    && Deposit.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+            </div>
+            <div class="fee-wrapper">
+              <div class="input-wrapper">
+                <input  type="number" placeholder='opłaty za media' class=" card-1 inpt"
+                   [(ngModel)]="newOffer.mediaFee" name="mediafee"
+                   #MediaFee="ngModel">
+                   <md-hint class='success' *ngIf="(MediaFee.dirty || MediaFee.touched) && !MediaFee.focus
+                      && MediaFee.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+              </div> 
+              <div class="input-wrapper">
+                <input  type="number" placeholder='opłaty licznikowe' class=" card-1 inpt"
+                   required 
+                   [(ngModel)]="newOffer.usageFee" name="usagefee"
+                   #UsageFee="ngModel">
+                   <md-hint class='success' *ngIf="(UsageFee.dirty || UsageFee.touched) && !UsageFee.focus
+                      && UsageFee.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+              </div> 
+            </div> -->
+        </div>
+        </div>
+        <div class="current-images">
+            <ng-container *ngIf='arrayOfImages[0]'>
+              <div class="img-container" *ngFor='let newImage of arrayOfImages'>
+                  <div class="delete-button">
+                  <button md-icon-button (click)='removeFromArray(newImage)'>
+                    <md-icon  class='mdi mdi-delete'></md-icon>
+                  </button>
+              </div>
+                <img [src]='newImage.src' alt="img preview">
+              </div>
+            </ng-container>
+            <div class="file-upload">
+                <input type="file" #fileUpload name="imageUpload" id='imageUpload' accept="image/*" (change)='onImageChange($event, showFileNames)' multiple />
+                <label for="imageUpload"><button md-icon-button (click)='fileUpload.click()'><md-icon class='mdi mdi-plus'></md-icon></button></label>
+              </div>
+        </div>
+          <div class="send-form">
+            <button class="card-1 send-form"  md-icon-button [disabled]='!arrayOfImages[0] || !newOffer.deposit || !newOffer.monthlyFee || !newOffer.offerDescription || !newOffer.offerTitle || !newOffer.buildingType || !newOffer.facilityFormattedAddress || !newOffer.sqmt || !newOffer.roomsCount || loadingIndicator || FacilityAddress.errors' (click)='sendOffer()'><md-icon svgIcon='paper-plane'></md-icon></button>
+            <ng-container *ngIf='loadingIndicator'> 
+              <md-spinner color='accent'></md-spinner>
+              <h4>Trwa wysyłanie oferty, proszę czekać</h4>
+            </ng-container>
+          </div>
+    </form>
+	</article>
+</section>

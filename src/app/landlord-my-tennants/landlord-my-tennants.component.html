@@ -1,0 +1,92 @@
+<section class="landlord-my-tennants">
+	<md-icon svgIcon='my-tennants'></md-icon>
+	<h1>Moi najemcy</h1>
+	<article>
+		<ng-container *ngIf='!userAgreements && loading'>
+			<div class="loading">
+				<md-spinner color='accent'></md-spinner>
+			</div>
+		</ng-container>
+		<ng-container *ngIf='!userAgreements && !loading'>
+			<div class="no-data">
+				<p>Brak umów</p>
+			</div>
+		</ng-container>
+		<ng-container *ngIf='userAgreements'>
+			<div class="agreements-container">
+				<div class="agreement-row" *ngFor="let agr of userAgreements">
+					<div class="agreement card-1" >
+						<img class="card-2" [src]='url + agr.offer.images[0].path' alt="offer image">
+						<div class="status card-1">
+							status: 
+							<span *ngIf='agr.agreementStatus === "Waiting_for_landlord"'>Oczekiwanie na wypełnienie danych przez właściciela</span>
+							<span *ngIf='agr.agreementStatus === "Waiting_for_tennant"'>Oczekiwanie na wypełnienie przez wynajmującego</span>
+							<span *ngIf='agr.agreementStatus === "Generating_the_contract"'> Kontrakt wygenerowany</span>
+							<span *ngIf='agr.agreementStatus === "signed"'>Kontrakt podpisany</span>
+						</div>
+						<h3>{{agr.offer.offerTitle}}</h3>
+						<h4>{{agr.offer.facilityFormattedAddress}}</h4>
+					
+					</div>
+
+					<div class="panel card-1">
+						<div class="wrapper">
+							<ul class="prices">
+								<li class="card-1" mdTooltip='Czynsz miesięczny'><md-icon svgIcon='monthlyFee'></md-icon> <span>{{agr.bid.BidMonthlyFee}} PLN</span></li>
+								<li class="card-1" mdTooltip='Kaucja'><md-icon svgIcon='deposit'></md-icon> <span>{{agr.bid.BidDeposit}} PLN</span></li>
+								<li class="card-1" mdTooltip='Okres umowy'> <md-icon svgIcon='contract'></md-icon> <span>{{agr.bid.bidContractDuration}} m.</span></li>
+								<li class="card-1" mdTooltip='Data wprowadzenia'><md-icon svgIcon='box'></md-icon> <span>{{agr.bid.bidMoveInDate | date}}</span></li>
+							</ul>
+						</div>
+						<div class="wrapper">
+							<h4>Postęp: </h4>
+							<ul class="wizard">
+								<li mdTooltip='Wypełnij brakujące dane' class="card-1" [ngClass]='{"highlighted":agr.agreementStatus === "Waiting_for_landlord"}'>1<md-icon *ngIf='["Waiting_for_tennant", "Generating_the_contract", "Signed"].indexOf(agr.agreementStatus)>=0' class='mdi mdi-checkbox-marked-circle'></md-icon></li>
+								<li mdTooltip='Poczekaj, aż wynajmujący wypełni brakujące dane' class="card-1" [ngClass]='{"highlighted":agr.agreementStatus === "Waiting_for_tennant"}'>2<md-icon *ngIf='["Generating_the_contract", "Signed"].indexOf(agr.agreementStatus) >=0' class='mdi mdi-checkbox-marked-circle'></md-icon></li>
+								<li [ngClass]='{"highlighted":agr.agreementStatus === "Generating_the_contract"}' mdTooltip='Kontrakt wygenerowany' class="card-1">3<md-icon *ngIf='["Signed"].indexOf(agr.agreementStatus)>=0' class='mdi mdi-checkbox-marked-circle'></md-icon></li>
+								<li [ngClass]='{"highlighted":agr.agreementStatus === "signed"}' mdTooltip='Kontrakt podpisany' class="card-1">4</li>
+							</ul>
+						</div>
+						<div class="status-started" *ngIf='agr.agreementStatus==="Waiting_for_landlord"'>
+							<div class="wrapper">
+								<button md-icon-button class="card-1" (click)='landlordDetailsDialog(agr)'><md-icon class='mdi mdi-feather'></md-icon></button>
+							</div>
+						</div>
+						<div class="status-generating-contract" *ngIf='agr.agreementStatus==="Generating_the_contract"'>
+							<div class="wrapper">
+								<button mdTooltip='Pobierz kontrakt' md-icon-button class="card-1"><md-icon class='mdi mdi-file-document'></md-icon></button>
+								<button mdTooltip='Podpisz kontrakt' md-icon-button class="card-1"><md-icon class='mdi mdi-marker-check'></md-icon></button>
+							</div>
+						</div>
+						<div class="my-data" *ngIf='agr.agreementStatus==="Generating_the_contract"'>
+							<div class="change-data">
+							<h4>Twoje dane: </h4>
+							</div>							
+							<ul>
+								<li>Numer telefonu: <span>{{agr.telephoneNumber}}</span></li>
+								<li>Numer księgi wieczystej: <span>{{agr.mortgageNumber}}</span></li>
+								<li>Numer rachunku: <span>{{agr.accountNumberCry}}</span></li>
+								<li>Seria i numer dowodu: <span>{{agr.idSeries}}{{agr.idNumber}}</span></li>
+								<li>Adres zameldowania: <span>{{agr.street}} {{agr.buildingNumber}} <span *ngIf='agr.apartmentNumber'>/ {{agr.apartmentNumber}}</span>, {{agr.city}}</span></li>
+							</ul>
+						</div>
+						<div class="status-waiting-for-tennant" *ngIf='agr.agreementStatus==="Waiting_for_tennant"'>
+							<div class="change-data">
+								<h4>Twoje dane: </h4>
+							</div>							
+							<ul>
+								<li>Numer telefonu: <span>{{agr.telephoneNumber}}</span></li>
+								<li>Numer księgi wieczystej: <span>{{agr.mortgageNumber}}</span></li>
+								<li>Numer rachunku: <span>{{agr.accountNumberCry}}</span></li>
+								<li>Seria i numer dowodu: <span>{{agr.idSeries}}{{agr.idNumber}}</span></li>
+								<li>Adres zameldowania: <span>{{agr.street}} {{agr.buildingNumber}} <span *ngIf='agr.apartmentNumber'>/ {{agr.apartmentNumber}}</span>, {{agr.city}}</span></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</ng-container>
+		
+	</article>
+</section>

@@ -1,0 +1,150 @@
+/* You can add global styles to this file, and also import other style files */
+// @import '/assets/theme';
+// PALETTE
+* {
+	margin: 0;
+	padding : 0;
+	font-family: Montserrat;
+}
+$col-1 : #0E65E5;
+$col-2 : #AE7CF9;
+$primary : #7D53DE;
+$primary-aggresive: #5D37B3;
+$accent : rgba(228, 123, 129, 0.8);
+$accent-light : #FBAEB2;
+$secondary : #855DE1;
+$third : #78E3FD;
+$third-aggressive : #07D0FF;
+$forth : #D1F5FF;
+$fifth : #EEF8FF;
+// MATERIAL DESIGN BOXES
+snack-bar-container {
+	background-color: $primary-aggresive !important;
+}
+.mat-dialog-container {
+	max-width: none !important;
+}
+
+.mat-tooltip {
+	background-color: #FBAEB2 !important;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.mat-tab-header {
+	border: none;
+}
+.mat-dialog-container {
+	padding: 0 !important;
+}
+.mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb {
+	background-color: $third;
+	opacity: 0.5;
+}   
+
+.mat-slider-track-background {
+	background-color: $accent;
+}
+							.mat-slider-thumb-label {
+								width: 50px !important;
+								height: 50px !important;
+								color: $third;
+								
+							}
+							.mat-slider-vertical .mat-slider-thumb-label {
+								color: $primary;
+								left: -70px !important;
+							}
+.pac-container {
+	background-color: transparent;
+	box-shadow: none;
+	border: none;
+	overflow: visible;
+	&:after {
+		display: none;
+		
+	}
+	.pac-item {
+		background-color: #fff;
+		opacity: 0.9;
+		border-radius: 10px;
+		margin: 5px 0;
+		border: none;
+		cursor: pointer;
+		transition-duration: 0.5s;
+		.pac-icon {
+			color: $forth;
+		}
+		&:hover {
+			opacity: 1;
+			transform: scale(1.02);
+		}
+
+	}
+}
+.card-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+ }
+
+ .card-2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.card-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.card-4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.card-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+input, select, option, textarea {
+	   -webkit-appearance: none;
+	   -moz-appearance:    none;
+	   appearance:         none;
+}
+
+.input-wrapper {
+	position: relative;
+	display: inline-block;
+}
+.inpt {
+	border-radius: 15px;
+	outline: none;
+	border: none;
+	transition-duration: 0.5s;
+	box-sizing: border-box;
+	&:focus {
+		background-color: $third;
+		transition-duration: 0.5s;
+	}
+}
+.inpt.lg {
+	padding: 5px;
+
+}
+
+md-hint {
+	display: block;
+	color: $third;
+	padding: 0;
+	font-size: 9px;
+}
+
+md-hint.success, md-hint.alert {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 15px;
+	font-size: 20px;
+	i {
+		color: $third;
+	}
+}
+md-hint.alert {
+	i {
+		color: #F85555;
+	}
+}

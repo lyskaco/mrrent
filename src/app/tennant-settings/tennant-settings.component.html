@@ -1,0 +1,50 @@
+<section class="tennant-settings">
+	<main>
+		<md-icon svgIcon='settings' ></md-icon>
+		<h1>Ustawienia konta</h1>
+		<article class="change-avatar">
+			<h2>Zmień avatar</h2>
+			<div class="avatar-container card-2">
+				<button class="card-1" [ngClass]='{"selected":iconSelected===icon}' (click)='iconSelected=icon' md-icon-button *ngFor="let icon of icons"><md-icon svgIcon='{{icon}}'></md-icon></button>
+			</div>
+			<button md-raised-button [disabled]='!iconSelected' (click)='changeAvatar()'>Zmień avatar</button>
+		</article>
+		<article class="change-main">
+			<div class="col password card-2">
+				<h2>Zmiana hasła</h2>
+			<div class="input-wrapper">
+               <input type="text" placeholder='stare hasło'  class=" card-1 inpt lg form-control" id="name"
+               required
+               [(ngModel)]="oldPassword" type='password' size="25" name="oldPassword"
+               #OldPassword="ngModel">
+               <ng-container *ngIf='OldPassword.errors'>
+               		<md-hint *ngIf='OldPassword.errors.required' mdTooltip='Pole wymagane!' class='alert' ><i class="mdi mdi-alert"></i></md-hint>
+               </ng-container>
+            </div>
+				            <div class="input-wrapper">
+               <input type="text" placeholder='nowe hasło'  class=" card-1 inpt lg form-control" id="name"
+               required
+               [(ngModel)]="password" minlength='8' pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$' type='password' size="25" name="password"
+               #Password="ngModel">
+               <div *ngIf="Password.errors && (Password.dirty || Password.touched)">
+              	 <md-hint *ngIf='Password.errors.required' mdTooltip='Pole wymagane!' class='alert' ><i class="mdi mdi-alert"></i></md-hint>
+              	 <md-hint *ngIf='Password.errors.pattern' mdTooltip='Hasło musi zawierać przynajmniej: 1 dużą literę, małą literę i cyfrę' class='alert' ><i class="mdi mdi-alert"></i></md-hint>
+              	 <md-hint *ngIf='Password.errors.minlength' mdTooltip='Minimum 8 znaków!' class='alert' ><i class="mdi mdi-alert"></i></md-hint>
+               </div>
+				<md-hint class='success' *ngIf="(Password.dirty || Password.touched) && !Password.focus
+				&& Password.valid"> <i class="mdi mdi-check"></i></md-hint>
+            </div>
+            <div class="input-wrapper">
+               <input type="text" placeholder='powtórz hasło'  class=" card-1 inpt lg form-control" id="name"
+               required
+               [(ngModel)]="repeat_password" type='password' size="25" name="repeatPassword"
+               #repeat_Password="ngModel">
+               <md-hint  class='alert' *ngIf="(repeat_Password.dirty || repeat_Password.touched) && password != repeat_password && !repeat_Password.focus"><i mdTooltip='Hasła nie są jednakowe' class="mdi mdi-alert"></i></md-hint>
+				<md-hint class='success' *ngIf="(repeat_Password.dirty || repeat_Password.touched) && !repeat_Password.focus
+				&& repeat_Password.valid && password === repeat_password"> <i class="mdi mdi-check"></i></md-hint>
+            </div>
+            <button md-raised-button (click)='changePassword()' [disabled]='repeat_password !== password || !oldPassword || !password '>ZMIEŃ HASŁO</button>
+			</div>
+		</article>
+	</main>
+</section>

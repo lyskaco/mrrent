@@ -1,0 +1,32 @@
+<section class="login">
+	<article class="card-1">
+		<h1>Zaloguj się</h1>
+		<form class="">
+			<div class="input-wrapper">
+			<input type="text" placeholder='email' class=" card-1 inpt lg form-control"
+               required
+               [(ngModel)]="loginCredentials.email" name="email"
+               #Email="ngModel">
+               <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="Email.errors && (Email.dirty || Email.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+				<md-hint class='success' *ngIf="(Email.dirty || Email.touched) && !Email.focus
+				&& Email.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+            </div>
+            <div class="input-wrapper">
+               <input type="text" placeholder='hasło'  class=" card-1 inpt lg form-control" id="name"
+               required
+               [(ngModel)]="loginCredentials.password" type='password' size="25" name="password"
+               #Password="ngModel">
+               <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="Password.errors && (Password.dirty || Password.touched)"><i class="mdi mdi-alert"></i></md-hint>
+				<md-hint class='success' *ngIf="(Password.dirty || Password.touched) && !Password.focus
+				&& Password.valid"> <i class="mdi mdi-check"></i></md-hint>
+            </div>
+            <div *ngIf='isLoading' class="spinner">
+               <md-spinner color='accent'></md-spinner>
+            </div>
+            <p>{{messageAfterSubmit}}</p>
+            <button md-button [disabled]='!loginCredentials.email || !loginCredentials.password' (click)='login()'>ZALOGUJ</button>
+		</form>
+		<p>Nie masz konta? <a routerLink='/register'>Zarejestruj się!</a></p>
+      <p><a routerLink='/forgot'>Zapomniałeś hasła?</a> </p>
+	</article>
+</section>

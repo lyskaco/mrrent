@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 276.188 276.188" style="enable-background:new 0 0 276.188 276.188;" xml:space="preserve" width="50px" height="50px">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="278.188" width="278.188" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path stroke="null" id="svg_2" d="m72.593997,138.226026l65.500002,-128.000001l65.500002,128.000001l-65.500002,128.000001l-65.500002,-128.000001z" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#5D37B3"/>
+  <ellipse stroke="null" ry="87.500001" rx="73.500005" id="svg_3" cy="98.093991" cx="138.093999" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#5D37B3"/>
+  <path stroke="null" id="svg_14" d="m188.343848,83.866801l-13.026164,-12.92689l0,-30.873399l-11.167107,0l0,19.791398l-26.056583,-25.858002l-50.249854,49.866892l11.96263,-0.282855l0,50.415715l76.04268,0l0,-50.13286l12.494397,0zm-50.249854,42.922172l-24.814375,0l0,-29.552002l24.814375,0l0,29.552002zm24.108188,-12.665144l-16.306103,0l0,-17.06417l16.306103,0l0,17.06417z" fill-opacity="null" stroke-opacity="null" stroke-width="7" fill="#07d0ff"/>
+ </g>
+</svg>

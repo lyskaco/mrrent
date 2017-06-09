@@ -1,0 +1,82 @@
+<section class="landlord-details-dialog">
+	<h1>Uzupełnij swoje dane:</h1>
+	<form>
+        <div class="wrapper id">
+        	<div class="input-wrapper serie">
+			<input type="text" placeholder='seria dowodu' class=" card-1 inpt lg form-control"
+               required
+               [(ngModel)]="idSeries" name="idseries"
+               #IdSeries="ngModel">
+               <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="IdSeries.errors && (IdSeries.dirty || IdSeries.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+				<md-hint class='success' *ngIf="(IdSeries.dirty || IdSeries.touched) && !IdSeries.focus
+				&& IdSeries.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+        	</div>
+			<div class="input-wrapper number">
+				<input type="text" placeholder='numer dowodu' class=" card-1 inpt lg form-control"
+	               required
+	               [(ngModel)]="idNumber" name="idnumber"
+	               #IdNumber="ngModel">
+	               <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="IdNumber.errors && (IdNumber.dirty || IdNumber.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+					<md-hint class='success' *ngIf="(IdNumber.dirty || IdNumber.touched) && !IdNumber.focus
+					&& IdNumber.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+	        </div>
+        </div>
+        <h3>Dane zameldowania: </h3>
+        <div class="input-wrapper">
+			<input type="text" placeholder='Miasto' class=" card-1 inpt lg form-control"
+               required
+               [(ngModel)]="city" name="city"
+               #City="ngModel">
+               <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="City.errors && (City.dirty || City.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+				<md-hint class='success' *ngIf="(City.dirty || City.touched) && !City.focus
+				&& City.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+        </div>
+        <div class="input-wrapper">
+			<input type="text" placeholder='Ulica' class=" card-1 inpt lg form-control"
+               required
+               [(ngModel)]="street" name="street"
+               #Street="ngModel">
+               <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="Street.errors && (Street.dirty || Street.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+				<md-hint class='success' *ngIf="(Street.dirty || Street.touched) && !Street.focus
+				&& Street.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+        </div>
+        <div class="wrapper">
+        	<div class="input-wrapper">
+			<input type="text" placeholder='Numer budynku' class=" card-1 inpt lg form-control"
+               required
+               [(ngModel)]="buildingNumber" name="buildingNumber"
+               #BuildingNumber="ngModel">
+               <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="BuildingNumber.errors && (BuildingNumber.dirty || BuildingNumber.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+				<md-hint class='success' *ngIf="(BuildingNumber.dirty || BuildingNumber.touched) && !BuildingNumber.focus
+				&& BuildingNumber.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+        	</div>
+        	<div class="input-wrapper">
+			<input type="text" placeholder='Numer mieszkania' class=" card-1 inpt lg form-control"
+               required
+               [(ngModel)]="apartmentNumber" name="apartmentNumber"
+               #ApartmentNumber="ngModel">
+				<md-hint class='success' *ngIf="(ApartmentNumber.dirty || ApartmentNumber.touched) && !ApartmentNumber.focus
+				&& ApartmentNumber.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+        	</div>
+        </div>
+        <div class="input-wrapper">
+			<input type="number" placeholder='numer rachunku' class=" card-1 inpt lg form-control"
+               required
+               [(ngModel)]="accountNumber" name="accountNumber"
+               #AccountNumber="ngModel">
+               <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="AccountNumber.errors && (AccountNumber.dirty || AccountNumber.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+				<md-hint class='success' *ngIf="(AccountNumber.dirty || AccountNumber.touched) && !AccountNumber.focus
+				&& AccountNumber.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+        </div>
+                <div class="input-wrapper">
+			<input type="text" placeholder='numer księgi wieczystej' class=" card-1 inpt lg form-control"
+               required
+               [(ngModel)]="mortgageNumber" name="mortgageNumber"
+               #MortgageNumber="ngModel">
+               <md-hint mdTooltip='Pole wymagane!' class='alert' *ngIf="MortgageNumber.errors && (MortgageNumber.dirty || MortgageNumber.touched)" ><i class="mdi mdi-alert"></i></md-hint>
+				<md-hint class='success' *ngIf="(MortgageNumber.dirty || MortgageNumber.touched) && !MortgageNumber.focus
+				&& MortgageNumber.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+        </div>
+        <button md-button (click)='uploadLandlordDetails()' [disabled]='!mortgageNumber || !accountNumber || !city || !street || !buildingNumber || !idSeries || !idNumber'>WYŚLIJ DANE</button>
+	</form>
+</section>

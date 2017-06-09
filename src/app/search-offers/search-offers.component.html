@@ -1,0 +1,130 @@
+<section class="search-offers">
+	<div class="map-wrapper card-2" #mapwrapper>
+	<!-- 	<sebm-google-map  (mapClick) ='placeIdFilter=null; zoom=11; mapLong=googleMapLong;mapLat=googleMapLat' class='card-1' [latitude]="mapLat" [longitude]="mapLong" [scrollwheel]="false" [zoom]="zoom">
+		        <ng-container *ngIf="selectedOffers">
+		        	<ng-container *ngIf='selectedOffers[0]'>
+			        	<ng-container *ngFor='let offer of clusteredOffers'>
+					        <sebm-google-map-marker  [zIndex]='3' *ngIf='offer.quantity>1' (markerClick)='placeIdFilter=offer.detailedPlaceId;zoom=15; mapLong=offer.longitude;mapLat=offer.latitude' [iconUrl]='returnSVG(offer)'  [latitude]="offer.latitude" [longitude]="offer.longitude">
+					        </sebm-google-map-marker>
+					         <sebm-google-map-marker  *ngIf='offer.quantity<=1' (markerClick)='placeIdFilter=offer.detailedPlaceId;zoom=15;mapLong=offer.longitude;mapLat=offer.latitude' [iconUrl]='"./assets/home.svg"'  [latitude]="offer.latitude" [longitude]="offer.longitude">
+
+					        </sebm-google-map-marker>
+				        </ng-container>
+				     </ng-container>
+			    </ng-container>
+			    <ng-container *ngIf='!selectedOffers'>
+			    		<sebm-google-map-marker [latitude]="mapLat" [longitude]="mapLong"></sebm-google-map-marker>
+			    </ng-container>
+		</sebm-google-map> -->
+		<div class="spinner" *ngIf='!endSpin'>
+			<md-spinner></md-spinner>
+		</div>
+	</div>
+	<div class="wrapper-col">
+	<nav class="search-panel ">
+		<input type="text" placeholder='szukaj mieszkania' class="card-1 form-control mrgd"
+               required pattern="^[a-zA-Z\-_ ’'‘ÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ]+$"
+               [(ngModel)]="searchPlaceID" name="facilityAddress"
+               #SearchPlaceId="ngModel" autocorrect="off" #search autocapitalize="off" spellcheck="off" type="text">
+               <md-icon class='mdi mdi-magnify'></md-icon>
+
+	</nav>
+	<div class="offers-filter-container">
+		<div class="toggle-filters card-1" (click)='toggleFilterContainer=!toggleFilterContainer'>
+			<h1>Filtry</h1>
+			<i class="mdi mdi-filter"></i>
+		</div>
+		<div *ngIf='toggleFilterContainer' class="filter-container card-3" [@filterContainer]='toggleFilterContainer'>
+			<div class="filter-col-1">
+				<div class="pair-wrapper">
+					<md-icon svgIcon='monthlyFee'></md-icon>
+					<div class="input-wrapper">
+						<input class='inpt lg card-1' type="number" placeholder="czynsz: od" [(ngModel)]='feeMin' name='feeMin'>
+					</div>
+					<div class="input-wrapper">
+						<input  class='inpt lg card-1' type="number" placeholder="czynsz: do" [(ngModel)]='feeMax' name='feeMax'>
+					</div>
+				</div>
+				<div class="pair-wrapper">
+				<md-icon svgIcon='deposit'></md-icon>
+					<div class="input-wrapper">
+						<input class='inpt lg card-1' type="number" placeholder="kaucja: od" [(ngModel)]='depositMin' name='depositMin'>
+					</div>
+					<div class="input-wrapper">
+						<input  class='inpt lg card-1' type="number" placeholder="kaucja: do" [(ngModel)]='depositMax' name='depositMax'>
+					</div>
+				</div>
+				<div class="pair-wrapper">
+				<md-icon class='mdi mdi-rhombus'></md-icon>
+					<div class="input-wrapper">
+						<input class='inpt lg card-1' type="number" placeholder="powierzchnia: od" [(ngModel)]='sqmtMin' name='sqmtMin'>
+					</div>
+					<div class="input-wrapper">
+						<input  class='inpt lg card-1' type="number" placeholder="powierzchnia: do" [(ngModel)]='sqmtMax' name='sqmtMax'>
+					</div>
+				</div>
+			</div>
+			<div class="filter-col-2">
+				<div class="pair-wrapper">
+					<md-icon svgIcon='home-icon'></md-icon>
+					<ul class="buildingTypeList">
+                  		<li [ngClass]='{"selected" : type === filterBuildingType}' class="card-1" *ngFor = 'let type of buildingTypes; let i = index' (click)='selectBuildingType(type)'>{{type}}</li>
+                	</ul>  
+				</div>
+				<div class="pair-wrapper">
+					<md-icon svgIcon='bed-icon'></md-icon>
+					<ul class="buildingTypeList">
+                  		<li [ngClass]='{"selected" : type === filterRoomsCount}' class="card-1" *ngFor = 'let type of roomsCount; let i = index' (click)='selectRoomsCount(type)'>{{type}}</li>
+                	</ul>   
+				</div>
+				<ul class="pair-wrapper more-info">
+					<li *ngFor = 'let info of moreInfo' (click)='moreInfoFilter(info)' [ngClass]='{"selected": moreInfoArrayA.indexOf(info)>=0}' mdTooltip='{{moreInfoDesc[info]}}'><md-icon svgIcon='so-{{info}}'></md-icon></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<main>
+		<article *ngIf='selectedOffers'>
+			<ng-container *ngIf='selectedOffers[0]'>
+				<div class="offer card-1" *ngFor='let offer of selectedOffers | offersFilterFeeMin: feeMin | offersFilterFeeMax : feeMax | offersFilterDepositMin:depositMin | offersFilterDepositMax:depositMax | offersFilterSqmtMax:sqmtMax | offersFilterSqmtMin:sqmtMin | offersFilterBuildingType:filterBuildingType | offersFilterRoomsCount: filterRoomsCount | detailedPlaceIdFilter: placeIdFilter | moreInfoFilter:moreInfoArray; let i = index'>
+					<div class="img-container">
+						<img *ngIf='offer.images[0]' class='card' [src]='url + offer.images[offer.imgIndex].path' alt="preview img">
+						<ng-container *ngIf='offer.images.length>1'>
+							<button md-icon-button class="left" (click)='moveCarousel(-1, i)'><md-icon class='mdi mdi-chevron-left'></md-icon></button>
+							<button md-icon-button class="right" (click)='moveCarousel(1, i)'><md-icon class='mdi mdi-chevron-right'></md-icon></button>
+						</ng-container>
+					</div>
+
+					<div class="offer-wrapper">
+					<div class="info-container">
+						<h2>{{offer.offerTitle}}</h2>
+						<h3><i class='mdi mdi-map-marker'></i>{{offer.facilityFormattedAddress}}</h3>
+					</div>
+					<div class='wrapper'>
+						<button md-icon-button [routerLink]="['/offer/'+offer.id]"><md-icon class='mdi mdi-chevron-double-right'></md-icon></button>
+						<div class="payments">
+							<div class="monthlyFee">
+								<md-icon svgIcon='monthlyFee'></md-icon>
+								<h3>{{offer.monthlyFee}} <span>zł</span></h3>
+							</div>
+							<div class="deposit">
+								<md-icon svgIcon='deposit'></md-icon>
+								<h3>{{offer.deposit}} <span>zł</span></h3>
+							</div>
+						</div>
+						<ul class="asset-container card-1">
+								<li><md-icon color='accent' svgIcon='home-icon'></md-icon><span>{{offer.buildingType}}</span></li>
+								<li><md-icon svgIcon='bed-icon'></md-icon><span>{{offer.roomsCount}}</span></li>
+								<li><md-icon class='mdi mdi-rhombus'></md-icon><span>{{offer.sqmt}}m<sup>2</sup></span></li>
+						</ul>
+					</div>
+				</div>
+				</div>
+			</ng-container>
+		</article>
+		<article class="no-data" *ngIf='!selectedOffers && !offersLoading'> 
+			<h2>Nie znaleźliśmy mieszkań w tym miejscu.</h2>
+		</article>
+	</main>
+	</div>
+</section>

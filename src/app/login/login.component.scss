@@ -1,0 +1,76 @@
+@import '../../styles';
+.login {
+	
+	background-color: $secondary;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.spinner {
+		text-align: center;
+		margin: 10px 0;
+		transition: margin 0.5s;
+
+		.mat-spinner {
+			height: 35px;
+			width: 30px;
+			margin: 0 auto;
+		}
+	}
+	article 
+	{ 
+		width: 350px;
+		background-color: $primary;
+		h1 {
+			font-size: 36px;
+			color: #efefef;
+			font-weight: 900;
+			text-align: center;
+			margin: 15px 0;
+		}
+		p {
+			color: #efefef;
+			font-size: 14px;
+			text-align: center;
+			font-weight: 300;
+			margin: 0 0 17px 0;
+			a {
+				text-decoration: none;
+				color: $third;
+				font-weight: 600;
+			}
+		}
+		form {
+			text-align: center;
+			width: 100%;
+			.input-wrapper {
+				margin: 5px 0;
+				animation: inputSlideUp 0.1s ease backwards;
+				&:first-of-type {
+					animation-delay: 0.1s;
+				}
+				&:nth-of-type(2) {
+					animation-delay: 0.2s;
+				}
+				@keyframes inputSlideUp {
+					0% {
+						opacity: 0;
+						transform: translateY(90%);
+					}
+				}
+			input {
+				width: 300px;
+				padding: 10px;
+				
+			}
+		  }
+		  .mat-button {
+		  	color: #efefef;
+		  	margin: 10px 0;
+		  	color: #efefef;
+		  	font-weight: 600;
+
+		  }
+		}
+	}
+}

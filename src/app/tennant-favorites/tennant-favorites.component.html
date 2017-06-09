@@ -1,0 +1,73 @@
+<section class="tennant-favorites">
+	<md-icon svgIcon='favorite'></md-icon>
+	<h1>Ulubione i oferty</h1>
+		<div class="wrapper">
+			<article class="card-2 favs">
+				<ng-container *ngIf='userFavorites'>
+					<div class="slide-toggle">
+							  <h2>Ulubione</h2>
+						      <md-slide-toggle labelPosition='before' (change)='toggleOrderDirection()'>
+	        					<ng-container *ngIf='orderDirection==="ascending"'><span>oceny rosnąco</span></ng-container>
+	        					<ng-container *ngIf='orderDirection==="descending"'><span>oceny malejąco</span></ng-container>
+	      					  </md-slide-toggle>
+					</div>
+					<div class="content">
+					<div class="interest card-1" *ngFor="let interest of userFavorites | interestOrderBy:orderDirection" >
+						<h3>{{interest.offer.offerTitle}}</h3>
+						<ul class="stars" [ngClass]='{"count-1":interest.rate===1, "count-2":interest.rate===2, "count-3":interest.rate===3, "count-4":interest.rate===4, "count-5":interest.rate===5}'>
+							<li *ngFor='let i of [0,1,2,3,4]'>
+								<md-icon class='mdi mdi-star'></md-icon>
+							</li>
+						</ul>
+						<div class="button-container">
+							<button md-icon-button (click)='openMessageDialog(interest.offer.user_id, interest.offer.offerTitle)'><md-icon svgIcon='letter'></md-icon></button>
+							<button md-icon-button [routerLink]="['/offer/'+interest.offer.id]"><md-icon svgIcon='binoculars'></md-icon></button>
+						<!-- 	<button md-icon-button (click)='openBidDialog(interest)'><md-icon svgIcon='auction2'></md-icon></button> -->
+							<button md-icon-button (click)='deleteInterest(interest)'><md-icon svgIcon='erase'></md-icon></button>
+						</div>
+						</div>
+					</div>
+				</ng-container>
+				<ng-container *ngIf='!userFavorites && !loadingIndicator'>
+					<p class="no-data">Brak ulubionych</p>
+				</ng-container>
+				<ng-container *ngIf='!userFavorites && loadingIndicator'>
+					<div class="loading">
+						<md-spinner></md-spinner>
+					</div>
+				</ng-container>
+			</article>
+			<article class="card-2 bids">
+				<ng-container *ngIf='userBids'>
+					<div class="slide-toggle">
+					  <h2>Oferty</h2>
+					</div>
+					<div class="content">
+					<div class="interest card-1" *ngFor="let bid of userBids" >
+						<h3>{{bid.offer.offerTitle}}</h3>
+						<ul class="prices">
+							<li><md-icon svgIcon='monthlyFee'></md-icon><span>{{bid.BidMonthlyFee}} PLN</span></li>
+							<li><md-icon svgIcon='deposit'></md-icon><span>{{bid.BidDeposit}} PLN</span></li>
+							<li><md-icon svgIcon='contract'></md-icon><span>{{bid.bidContractDuration}} m.</span></li>
+							<li><md-icon svgIcon='box'></md-icon><span>{{bid.bidMoveInDate | date}}</span></li>
+						</ul>
+						<div class="button-container">
+							<button md-icon-button (click)='openMessageDialog(bid.offer.user_id, bid.offer.offerTitle)'><md-icon svgIcon='letter'></md-icon></button>
+							<button md-icon-button [routerLink]="['/offer/'+bid.offer.id]"><md-icon svgIcon='binoculars'></md-icon></button>
+							<button md-icon-button [disabled]='isBidAccepted(bid)' (click)='openBidDialog(bid)'><md-icon svgIcon='auction2'></md-icon></button>
+							<button md-icon-button [disabled]='isBidAccepted(bid)' (click)='deleteBid(bid)'><md-icon svgIcon='erase'></md-icon></button>
+						</div>
+						</div>
+					</div>
+				</ng-container>
+				<ng-container *ngIf='!userBids && !loadingIndicatorBid'>
+					<p class="no-data">Brak ulubionych</p>
+				</ng-container>
+				<ng-container *ngIf='!userBids && loadingIndicatorBid'>
+					<div class="loading">
+						<md-spinner></md-spinner>
+					</div>
+				</ng-container>
+			</article>
+		</div>
+</section>

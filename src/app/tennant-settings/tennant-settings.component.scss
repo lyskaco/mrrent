@@ -1,0 +1,133 @@
+@import '../../styles';
+.tennant-settings {
+	min-height: 100vh;
+	width: 100%;
+	background-image: linear-gradient(180deg, $third, $third-aggressive);
+	main {
+		min-height: 100vh;
+		display: flex;
+		padding: 100px 0;
+		justify-content: flex-start;
+		align-items: center;
+		flex-direction: column;
+		article.change-main {
+			width: 100%;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			margin-top: 25px;
+			.col {
+				width: 42%;
+				background-image: linear-gradient(120deg, $accent, $accent-light);
+				height: 40vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				border-radius: 10px;
+				h2 {
+					font-weight: 900;
+					color: $fifth;
+					margin: 10px 0;
+				}
+				.input-wrapper {
+					margin: 6px 0;
+					width: 50%;
+					input {
+						width: 100%;
+						border-radius: 20px;
+						padding: 10px;
+					}
+				}
+				button[disabled] {
+					opacity: 0.7;
+				}
+				.mat-raised-button {
+					padding: 4px 8px;
+					font-weight: 900;
+					color: $fifth;
+					background-color: $primary-aggresive;
+					margin-top: 15px;
+				}
+			}
+		}
+		article.change-avatar {
+			width: 100%;
+			margin-top: 30px;
+			text-align: center;
+			.mat-raised-button {
+				background-color: $primary;
+				color: $fifth;
+				font-weight: 900;
+				text-transform: uppercase;
+				margin-top: 20px;
+				padding: 4px 8px;
+			}
+			.avatar-container {
+				background-color: $accent-light;
+				display: flex;
+				width: 100%;
+				padding: 10px 0;
+				justify-content: center;
+				align-items: center;
+
+				.mat-icon-button.selected {
+					transform: scale(1.05);
+					opacity: 1;
+				}
+
+				.mat-icon-button {
+					opacity: 0.8;
+					width: 70px;
+					height: 70px;
+					transition-duration: 0.5s;
+					margin: 0 13px;
+					.mat-icon {
+						width: inherit;
+						height: inherit;
+
+					}
+
+				}
+			}
+			h2 {
+				margin-bottom: 25px;
+				text-align: center;
+				font-size: 35px;
+				color: $primary;
+				font-weight: 900;
+			}
+		}
+	}
+	main > h1 {
+		font-size: 40px;
+		color: $primary-aggresive;
+		font-weight: 900;
+	}
+	main > .mat-icon {
+		width: 70px;
+		height: 70px;
+		margin-bottom: 30px;
+	}
+
+}
+
+@media(max-width: 768px) {
+.tennant-settings {
+	main {
+		article.change-avatar {
+			.avatar-container {
+			flex-wrap: wrap;
+			height: auto;
+			.mat-icon-button {
+				margin: 5px;
+			}
+		}
+		}
+		article.change-main {
+			.col.password {
+				width: 100%;
+			}
+		}
+	}
+}}

@@ -1,0 +1,126 @@
+
+.mydp ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #EEF8FF;
+}
+.mydp ::-moz-placeholder { /* Firefox 19+ */
+  color: #EEF8FF;;
+}
+.mydp :-ms-input-placeholder { /* IE 10+ */
+  color: #EEF8FF;;
+}
+.mydp :-moz-placeholder { /* Firefox 18- */
+  color: #EEF8FF;;
+}
+.mydp .selection {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
+	width: 100% !important;
+	display: block !important;
+	background-color: #FBAEB2 !important;
+}
+.mydp .selection,
+.mydp .weekdaytitle,
+.mydp .monthinput,
+.mydp .yearinput {
+    font-weight: normal;
+    font-size: 18px !important;
+    color: #EEF8FF !important;
+
+  
+}
+.mydp * :not(.mydpicon){
+	font-family: Montserrat, sans-serif !important;
+}
+
+.mydp .weekdaytitle {
+    color: #000;
+}
+.mydp {
+	}
+
+.mydp .daycell {
+	background-color: #78E3FD !important;
+	color: #222 !important;
+	font-weight: 900 !important;
+	height: 40px !important;
+}
+.mydp .btnclear {
+	color: #EEF8FF !important;
+	background-color: #FBAEB2 !important;
+}
+.mydp,
+.mydp .selectiongroup,
+.mydp .selection,
+.mydp .selector {
+    border-radius: 20px !important;
+}
+.mydp .selector {
+	border: none !important;
+	position: absolute !important;
+	top: 40% !important;
+	width: 400px !important;
+	left: 50%;
+	transform: translate(-50%, -70%) !important;
+	animation: fadeIn 0.5s ease !important;
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+}
+.mydp .weekdaytitle {
+	background-color: #7D53DE !important;
+	font-size: 16px !important;
+	font-weight: 900 !important;
+	color: #efefef !important;
+}
+.mydp .headerlabelbtn {
+	font-weight: 900 !important;
+}
+.mydp .selectorarrow:after, .mydp .selectorarrow:before {
+	display: none !important;
+}
+.mydp .header {
+    border-radius: 4px 4px 0 0;
+    background-color: #5D37B3 !important;
+
+}
+.mydp .header * {
+	background-color: #5D37B3 !important;
+	color: #fff !important;
+}
+
+.mydp .caltable {
+    border-radius: 0 0 4px 4px;
+}
+.mydp .currmonth {
+	font-weight: 900 !important;
+	background-color: #855DE1 !important;
+	font-size: 18px !important;
+	color: #f1f1f1 !important;
+}
+.mydp .headerbtn {
+	background-color: transparent !important;
+}
+.mydp .caltable tbody tr:nth-child(6) td:first-child {
+    border-bottom-left-radius: 4px;
+}
+
+.mydp .caltable tbody tr:nth-child(6) td:last-child {
+    border-bottom-right-radius: 4px;
+}
+
+.mydp .btnpicker {
+    width: 50px !important;
+    border-radius: 20px !important;
+    color: #EEF8FF !important;
+    background-color: #FBAEB2 !important;
+}
+.mydp, .mydp .headertodaybtn {
+	border: none !important;
+}
+ .mydp .headertodaybtn {
+ 	display: none !important;
+ }
+ .mydp .highlight {
+	color: rgba(228, 123, 129, 0.8) !important;
+}

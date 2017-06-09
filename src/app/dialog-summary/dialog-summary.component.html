@@ -1,0 +1,29 @@
+<section class="dialog-summary">
+	<h1>Podsumowanie</h1>
+	<ul class="summary-items">
+		<li class="card-1"><button md-icon-button class="card-1"><md-icon class='mdi mdi-feather'></md-icon></button><span>{{offerData.offerTitle}}</span></li>
+		<li class="card-1"><button md-icon-button class="card-1"><md-icon class='mdi mdi-map-marker'></md-icon></button><span>{{offerData.facilityFormattedAddress}}</span></li>
+		<li class="card-1"><button md-icon-button class="card-1"><md-icon class='mdi mdi-rhombus'></md-icon></button><span>{{offerData.sqmt}} m<sup>2</sup> </span></li>
+		<li class="card-1"><button md-icon-button class="card-1"><md-icon class='mdi mdi-home'></md-icon></button><span>{{offerData.buildingType}}</span></li>
+		<li class="card-1"><button md-icon-button class="card-1"><md-icon class='mdi mdi-sort-numeric'></md-icon></button><span>{{offerData.roomsCount}}</span></li>
+		<li class="card-1 more-info">
+				<md-icon *ngFor="let info of offerData.moreInfo" svgIcon='so-{{info}}'></md-icon>
+		</li>
+	</ul>
+	<ul class="prices">
+		<li class="card-1"><button md-icon-button class="card-1"><md-icon svgIcon='monthlyFee'></md-icon></button><span>{{offerData.monthlyFee}} PLN</span>
+		</li>
+		<li class="card-1"><button md-icon-button class="card-1"><md-icon svgIcon='deposit'></md-icon></button><span>{{offerData.deposit}} PLN</span>
+		</li>
+		<li class="card-1"><button md-icon-button class="card-1"><md-icon svgIcon='usageFee'></md-icon></button><span>{{offerData.usageFee}} PLN</span>
+		</li>
+		<li class="card-1"><button md-icon-button class="card-1"><md-icon svgIcon='mediaFee'></md-icon></button><span>{{offerData.mediaFee}} PLN</span>
+		</li>
+	</ul>
+	<div class="button-container">
+		<p>Opłata za wystawienie oferty: 20 PLN</p>
+			<button md-raised-button (click)='submit()'>Przejdź do płatności</button>
+			<button md-raised-button (click)='_dialogRef.close(false)'>Wyjdź</button>
+	</div>
+	
+</section>
