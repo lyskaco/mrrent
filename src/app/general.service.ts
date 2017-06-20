@@ -13,6 +13,27 @@ export class GeneralService {
   	redirectTo(location) {
   		this._router.navigateByUrl(location);
   	}
+  	tennantAdditionalService(agr, type) {
+  		let data = {
+  			id : agr.id,
+  			tennantName : agr.tennantName,
+  			tennantTelephone : agr.tennantTelephoneNumber,
+  			serviceType : type
+  		}
+
+  		return this.http.post(this.url + 'agreement/addService', data) // ...using post request
+                  .map((res:Response) =>  {
+                     let details = {
+                       status : res.status,
+                       detail : res.json()
+                     } 
+                     return details;
+                     }) // ...and calling .json() on the response to return data
+                  .catch((error:any) => {
+                    let details = {detail:error.json(),status: error.status};
+                    return Observable.of(details);
+         });
+  	}
   	getAllAgreements() {
 		return this.http.get(this.url + 'agreement/all/') // ...using post request
                       .map((res:Response) =>  {

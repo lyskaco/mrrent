@@ -15,6 +15,10 @@ export class AppComponent {
 	constructor(private route : Router, private snackbar : MdSnackBar, private ngZone : NgZone, private _message : MessageService, private _auth : AuthService, private mdIconRegistry: MdIconRegistry, 
    private sanitizer: DomSanitizer) {
 		 		mdIconRegistry
+                  .addSvgIcon('broken',
+            sanitizer.bypassSecurityTrustResourceUrl('./assets/svg/broken.svg'))
+                  .addSvgIcon('cleaning',
+            sanitizer.bypassSecurityTrustResourceUrl('./assets/svg/cleaning.svg'))
               .addSvgIcon('points',
             sanitizer.bypassSecurityTrustResourceUrl('./assets/svg/points.svg'))
                   .addSvgIcon('auctionn',

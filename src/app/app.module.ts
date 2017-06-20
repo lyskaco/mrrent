@@ -61,6 +61,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AgentAgreementsComponent } from './agent-agreements/agent-agreements.component';
 import { DayCountdownPipe } from './day-countdown.pipe';
 import { DialogMessageAgentComponent } from './dialog-message-agent/dialog-message-agent.component';
+import { DialogCleaningComponent } from './dialog-cleaning/dialog-cleaning.component';
+import { DialogBrokenComponent } from './dialog-broken/dialog-broken.component';
 
 const appRoutes: Routes = [
  
@@ -104,7 +106,7 @@ const appRoutes: Routes = [
     OffersFilterPipeRoomsCount, MoreInfoFilter, OffersFilterPipeBuildingType, OffersFilterPipeSqmtMax, OffersFilterPipeSqmtMin, OffersFilterPipe, OffersFilterPipeFeeMin, OffersFilterPipeDepositMin, OffersFilterPipeDepositMax, OffersFilterPipeFeeMax, DetailedPlaceIdFilter,
     LandlordMyOffersComponent, 
     SingleOfferComponent, 
-    DialogNotifyComponent, DialogMessageComponent, ParralaxDirective, LandlordEditOfferComponent, DialogPromptComponent, DialogNewBidComponent, LimitToPipe, LandlordInboxComponent, LandlordMyTennantsComponent, LandlordSettingsComponent, TennantFavoritesComponent, TennantInboxComponent, TennantPanelComponent, TennantSettingsComponent, InterestOrderByPipe, DialogSummaryComponent, AgoPipe, LandlordDetailsDialogComponent, TennantDetailsDialogComponent, AgentDashboardComponent, AgentInboxComponent, ForgotPasswordComponent, FooterComponent, PaymentComponent, NotFoundComponent, AgentAgreementsComponent, DayCountdownPipe, DialogMessageAgentComponent,
+    DialogNotifyComponent, DialogMessageComponent, ParralaxDirective, LandlordEditOfferComponent, DialogPromptComponent, DialogNewBidComponent, LimitToPipe, LandlordInboxComponent, LandlordMyTennantsComponent, LandlordSettingsComponent, TennantFavoritesComponent, TennantInboxComponent, TennantPanelComponent, TennantSettingsComponent, InterestOrderByPipe, DialogSummaryComponent, AgoPipe, LandlordDetailsDialogComponent, TennantDetailsDialogComponent, AgentDashboardComponent, AgentInboxComponent, ForgotPasswordComponent, FooterComponent, PaymentComponent, NotFoundComponent, AgentAgreementsComponent, DayCountdownPipe, DialogMessageAgentComponent, DialogCleaningComponent, DialogBrokenComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,7 +122,7 @@ const appRoutes: Routes = [
      apiKey: "AIzaSyBLJAPVMwNtdD1UMZ62gLA-onrU4FEtx_4",
      libraries: ["places"]})
   ],
-  entryComponents: [DialogMessageAgentComponent,TennantDetailsDialogComponent,LandlordDetailsDialogComponent, DialogSummaryComponent, DialogNewBidComponent, DialogNotifyComponent, DialogMessageComponent, DialogPromptComponent],
+  entryComponents: [DialogCleaningComponent, DialogBrokenComponent, DialogMessageAgentComponent,TennantDetailsDialogComponent,LandlordDetailsDialogComponent, DialogSummaryComponent, DialogNewBidComponent, DialogNotifyComponent, DialogMessageComponent, DialogPromptComponent],
   providers: [{ provide: LOCALE_ID, useValue: "pl" }, MessageSocketsService, MessageService, AuthService, GeneralService, DialogService, PreventLoggedInAccessService, PreventNotLoggedInAccessService, {provide: LocationStrategy, useClass: HashLocationStrategy},],
   bootstrap: [AppComponent]
 })

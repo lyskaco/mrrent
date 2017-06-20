@@ -29,7 +29,7 @@
 					
 					</div>
 
-					<div class="panel card-1" [ngClass]='{"centered": agr.agreementStatus === "Waiting_for_landlord"}'>
+					<div class="panel card-1" [ngClass]='{"centered": agr.agreementStatus === "Waiting_for_landlord", "summary": agr.agreementStatus === "signed"}'>
 						<div class="wrapper">
 							<ul class="prices">
 								<li class="card-1" mdTooltip='Czynsz miesięczny'><md-icon svgIcon='monthlyFee'></md-icon> <span>{{agr.bid.BidMonthlyFee}} PLN</span></li>
@@ -38,7 +38,7 @@
 								<li class="card-1" mdTooltip='Data wprowadzenia'><md-icon svgIcon='box'></md-icon> <span>{{agr.bid.bidMoveInDate | date}}</span></li>
 							</ul>
 						</div>
-						<div class="wrapper">
+						<div class="wrapper wiz">
 							<h4>Postęp: </h4>
 							<ul class="wizard">
 								<li mdTooltip='Poczekaj, aż właściciel wypełni dane.' class="card-1" [ngClass]='{"highlighted": agr.agreementStatus === "Waiting_for_landlord"}' >1<md-icon *ngIf='["Waiting_for_tennant", "Generating_the_contract", "Signed"].indexOf(agr.agreementStatus)>=0' class='mdi mdi-checkbox-marked-circle'></md-icon></li>
@@ -46,6 +46,7 @@
 								<li [ngClass]='{"highlighted":agr.agreementStatus === "Generating_the_contract"}' mdTooltip='Kontrakt wygenerowany' class="card-1">3<md-icon *ngIf='["Signed"].indexOf(agr.agreementStatus)>=0' class='mdi mdi-checkbox-marked-circle'></md-icon></li>
 								<li [ngClass]='{"highlighted":agr.agreementStatus === "signed"}' mdTooltip='Kontrakt podpisany' class="card-1">4</li>
 							</ul>
+							<h5 *ngIf='agr.agreementStatus==="signed"'>Kontrakt został podpisany</h5>
 						</div>
 						<div class="status-started" *ngIf='agr.agreementStatus==="Waiting_for_tennant"'>
 							<div class="wrapper">
@@ -53,7 +54,6 @@
 							</div>
 						</div>
 						<div class="status-waiting-for-tennant" *ngIf='agr.agreementStatus==="Waiting_for_"'>
-							
 							<div class="change-data">
 								<h4>Twoje dane: </h4>
 								<md-icon (click)='tennantDetailsDialog(agr)' svgIcon='editpen'></md-icon>
@@ -80,6 +80,15 @@
 								<li>Seria i numer dowodu: <span>{{agr.tennantIdSeries}} {{agr.tennantIdNumber}}</span></li>
 								<li>Adres zameldowania: <span>{{agr.tennantStreet}} {{agr.tennantBuildingNumber}}<span *ngIf='agr.tennantApartmentNumber'>/{{agr.tennantApartmentNumber}}</span>, {{agr.tennantCity}}</span></li>
 							</ul>
+						</div>
+						<div class="after-signed wrapper" *ngIf='agr.agreementStatus === "signed"'>
+							<div class="additional-services">
+								<h5>Skorzystaj z naszych dodatkowych usług:</h5>
+								<div class="button-wrapper">
+									<button md-icon-button (click)='showDialogCleaning(agr)' class='card-1' mdTooltip='Sprzątanie mieszkania'><md-icon svgIcon='cleaning'></md-icon></button>
+									<button md-icon-button (click)='showDialogBroken(agr)' class='card-1' mdTooltip='Naprawa usterek'><md-icon svgIcon='broken'></md-icon></button>
+								</div>
+							</div>
 						</div>
 					</div>
 

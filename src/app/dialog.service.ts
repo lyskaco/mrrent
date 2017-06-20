@@ -8,12 +8,23 @@ import {DialogNewBidComponent} from './dialog-new-bid/dialog-new-bid.component';
 import {DialogSummaryComponent} from './dialog-summary/dialog-summary.component';
 import {LandlordDetailsDialogComponent} from './landlord-details-dialog/landlord-details-dialog.component';
 import {TennantDetailsDialogComponent} from './tennant-details-dialog/tennant-details-dialog.component';
+import {DialogCleaningComponent} from './dialog-cleaning/dialog-cleaning.component';
+import {DialogBrokenComponent} from './dialog-broken/dialog-broken.component';
 
 @Injectable()
 export class DialogService {
 
   constructor( private _dialog : MdDialog) { }
 
+
+showDialogCleaning() {
+	let dialogRef = this._dialog.open(DialogCleaningComponent);
+		return dialogRef.afterClosed();
+}
+showDialogBroken() {
+	let dialogRef = this._dialog.open(DialogBrokenComponent);
+		return dialogRef.afterClosed();
+}
 showDialogMessageAgent(landlord_id, agent_id, ten_id, agr_id) {
 	let dialogRef = this._dialog.open(DialogMessageAgentComponent);
 		dialogRef.componentInstance.landlord_id = landlord_id;

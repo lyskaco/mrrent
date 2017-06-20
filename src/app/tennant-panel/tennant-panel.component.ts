@@ -49,13 +49,37 @@ export class TennantPanelComponent implements OnInit {
   		})	
   	})
   }
+  showDialogBroken(agreement) {
+    this._dialog.showDialogBroken().subscribe(res => {
+        if(res) {
+          this._general.tennantAdditionalService(agreement, 'repair').subscribe(res => {
+            if(res.status === 200) {
+                 this._snack.open('Zgłoszenie wysłane, wkrótce się z Tobą skontaktujemy', 'Zamknij', {duration: 1500});
+            }
+          })
+          
+        }
+    })
+  }
+  showDialogCleaning(agreement) {
+    this._dialog.showDialogCleaning().subscribe(res => {
+        if(res) {
+          this._general.tennantAdditionalService(agreement, 'cleaning').subscribe(res => {
+            if(res.status === 200) {
+                 this._snack.open('Zgłoszenie wysłane, wkrótce się z Tobą skontaktujemy', 'Zamknij', {duration: 1500});
+            }
+          })
+          
+        }
+    })
+  }
   getUserAgreements(id) {
   	this.loading = true;
   	this._general.getUserAgreements(id).subscribe(agreements => {
   		this.loading = false;
   		if(agreements.status === 200) {
   			this.userAgreements = agreements.detail.data;
-        console.log(agreements.detail.data);
+        this.userAgreements[0].agreementStatus = 'signed';
   		}
   	})
   }
